@@ -6,9 +6,11 @@ import {
 } from "@material-tailwind/react";
 import { useFormik } from "formik";
 import { useUserSignupMutation } from "../../Api/userApi";
+import { useNavigate } from "react-router";
 
  
 const Signup = () => {
+  const nav = useNavigate();
 const [userSignup,{isLoading}] = useUserSignupMutation();
 const{handleSubmit,handleChange,values} = useFormik({
   initialValues:{
@@ -19,7 +21,8 @@ const{handleSubmit,handleChange,values} = useFormik({
   onSubmit:async(val)=>{
     try {
   await userSignup(val).unwrap();
-      console.log('success')
+      console.log('success');
+      nav(-1);
 
     } catch (err) {
       console.log(err);
@@ -42,7 +45,7 @@ const{handleSubmit,handleChange,values} = useFormik({
           <Input
           name="username"
           onChange={handleChange}
-          value={values.email}
+          value={values.username}
             size="lg"
             placeholder="name@mail.com"
             className=" !border-t-blue-gray-200 focus:!border-orange-900"

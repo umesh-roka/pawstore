@@ -4,35 +4,35 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
 import { useUserLoginMutation } from "../../Api/userApi";
+import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../Slice/userSlice";
+import { useNavigate } from "react-router";
+
  
 const Login=()=> {
   const nav = useNavigate();
-  const dispatch = useDispatch();
-  const[userLogin,{isloading}] = useUserLoginMutation();
+const dispatch = useDispatch();
+ const [userLogin,{isloading}] = useUserLoginMutation();
+ const {handleSubmit,handleChange,values} = useFormik({
+  initialValues:{
+    email:'',
+    password:'',
+  },
+  onSubmit: async(val)=>{
+    try {
+      const response = await userLogin(val).unwrap();
+       
+      dispatch(addUser(response));
+      nav('/');
 
-  const {handleSubmit,handleChange,values} = useFormik({
-    initialValues:{
-      email:'',
-      password:'',
-
-    },
-    onSubmit: async(val)=>{
-      try {
-        const response = await userLogin(val).unwrap();
-        console.log(response);
-        dispatch(addUser(response));
-       console.log('success')
-        nav('/')
-      } catch (error) {
-        console.log(error);
-      }
+    } catch (err) {
+      console.log(err);
     }
-  })
+  }
+ })
+
   return (
      <Card color="transparent" className="flex justify-center items-center mt-8" shadow={false}>
       <Typography variant="h4" color="blue-gray">
