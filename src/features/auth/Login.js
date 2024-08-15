@@ -4,8 +4,35 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { useUserLoginMutation } from "../../Api/userApi";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../Slice/userSlice";
  
 const Login=()=> {
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+  const[userLogin,{isloading}] = useUserLoginMutation();
+
+  const {handleSubmit,handleChange,values} = useFormik({
+    initialValues:{
+      email:'',
+      password:'',
+
+    },
+    onSubmit: async(val)=>{
+      try {
+        const response = await userLogin(val).unwrap();
+        console.log(response);
+        dispatch(addUser(response));
+       console.log('success')
+        nav('/')
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  })
   return (
      <Card color="transparent" className="flex justify-center items-center mt-8" shadow={false}>
       <Typography variant="h4" color="blue-gray">
@@ -14,13 +41,16 @@ const Login=()=> {
       <Typography color="gray" className="mt-1 font-normal">
         Enter your details to login.
       </Typography>
-      <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+      <form  onSubmit={handleSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
         <div className="mb-1 flex flex-col gap-6">
          
           <Typography variant="h6" color="blue-gray" className="-mb-3">
             Your Email
           </Typography>
           <Input
+          name="email"
+          onChange={handleChange}
+          value={values.email}
             size="lg"
             placeholder="name@mail.com"
             className=" !border-t-blue-gray-200 focus:!border-orange-900"
@@ -32,6 +62,9 @@ const Login=()=> {
             Password
           </Typography>
           <Input
+          name="password"
+          onChange={handleChange}
+          value={values.password}
             type="password"
             size="lg"
             placeholder="********"
@@ -41,12 +74,12 @@ const Login=()=> {
             }}
           />
         </div>
-
-        <Button className="mt-6" fullWidth>
-          sign up
+        
+        <Button type="submit" className="mt-6" fullWidth>
+         Longin
         </Button>
         <Typography color="gray" className="mt-4 text-center font-normal">
-        <h1> Don't have an account ? <button>Signup</button></h1>
+        <h1> Don't have an account ? <button onClick={()=>nav('/signup')}>Signup</button></h1>
         
         </Typography>
       </form>

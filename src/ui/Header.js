@@ -20,10 +20,9 @@ const Header =()=> {
   }, []);
  
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center  font-bold text-lg lg:gap-6">
       <Typography
         as="li"
-        variant="small"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
@@ -31,7 +30,6 @@ const Header =()=> {
       </Typography>
       <Typography
         as="li"
-        variant="small"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
@@ -39,7 +37,6 @@ const Header =()=> {
       </Typography>
       <Typography
         as="li"
-        variant="small"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
@@ -47,7 +44,6 @@ const Header =()=> {
       </Typography>
       <Typography
         as="li"
-        variant="small"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
@@ -55,7 +51,6 @@ const Header =()=> {
       </Typography>
       <Typography
         as="li"
-        variant="small"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
@@ -65,25 +60,28 @@ const Header =()=> {
   );
  
   return (
-    <Navbar className="  px-4 py-2 lg:px-8 lg:py-4">
-      <div className="flex flex-wrap items-center justify-between text-blue-gray-900">
+    <div className="sticky top-0 z-50">
+    <Navbar className=" bg-orange-100 px-4 rounded-none py-2 lg:px-8 lg:py-4">
+      <div className="flex lg:mx-[200px] flex-wrap items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
-          href="#"
-          className="mr-4 cursor-pointer py-1.5 font-medium"
+          href="/"
+          className="mr-4 cursor-pointer py-1.5 font-bold text-2xl uppercase"
         >
-          Material Tailwind
+          PawSotre
         </Typography>
         <div className="hidden lg:block">{navList}</div>
-        <div className="hidden items-center gap-x-2 lg:flex">
+
+        <div className="hidden items-center  gap-x-2 lg:flex">
           <div className="relative flex w-full gap-2 md:w-max">
+          <div className="">
             <Input
               type="search"
               placeholder="Search"
               containerProps={{
                 className: "min-w-[288px]",
               }}
-              className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-blue-gray-300"
+              className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
@@ -113,6 +111,12 @@ const Header =()=> {
           <Button size="md" className="rounded-lg ">
             Search
           </Button>
+          </div>
+          <NavLink to='login' className=''>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+</svg>
+</NavLink>
         </div>
         <IconButton
           variant="text"
@@ -155,13 +159,16 @@ const Header =()=> {
       <MobileNav open={openNav}>
         <div className="container mx-auto">
           {navList}
+          <Button className="bg-black my-2"> <NavLink> Login</NavLink> </Button>
           <div className="flex flex-col gap-x-2 sm:flex-row sm:items-center">
+         
+
             <div className="relative w-full gap-2 md:w-max">
               <Input
                 type="search"
                 placeholder="Search"
                 containerProps={{
-                  className: "min-w-[288px]",
+                  className: "min-w-[200px]",
                 }}
                 className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-blue-gray-300"
                 labelProps={{
@@ -197,6 +204,7 @@ const Header =()=> {
         </div>
       </MobileNav>
     </Navbar>
+    </div>
   );
 }
 

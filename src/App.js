@@ -11,7 +11,7 @@ element:<RouteLayout/>,
 children:[
 {index:true, element:<Home/>},
 {path:'login',element:<Login/>},
-{path:'singup',element:<Signup/>}
+{path:'signup',element:<Signup/>}
 ]
 }])
 
