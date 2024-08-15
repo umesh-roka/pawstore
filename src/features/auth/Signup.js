@@ -4,19 +4,26 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { useUserLoginMutation } from "../../Api/userApi";
 import { useFormik } from "formik";
+import { useUserSignupMutation } from "../../Api/userApi";
 
  
 const Signup = () => {
-const [userLogin,{isLoading}] = useUserLoginMutation();
+const [userSignup,{isLoading}] = useUserSignupMutation();
 const{handleSubmit,handleChange,values} = useFormik({
   initialValues:{
+    username:'',
     email:'',
     password:'',
   },
   onSubmit:async(val)=>{
-    
+    try {
+  await userSignup(val).unwrap();
+      console.log('success')
+
+    } catch (err) {
+      console.log(err);
+    }
   }
 })
   return (
@@ -48,7 +55,8 @@ const{handleSubmit,handleChange,values} = useFormik({
           </Typography>
           <Input
           name="email"
-          
+          onChange={handleChange}
+          value={values.email}
             size="lg"
             placeholder="name@mail.com"
             className=" !border-t-blue-gray-200 focus:!border-orange-900"
@@ -61,7 +69,8 @@ const{handleSubmit,handleChange,values} = useFormik({
           </Typography>
           <Input
           name="password"
-        
+          onChange={handleChange}
+          value={values.password}
             type="password"
             size="lg"
             placeholder="********"
@@ -71,7 +80,7 @@ const{handleSubmit,handleChange,values} = useFormik({
             }}
           />
         </div>
-        <Button   className="mt-6" fullWidth>
+        <Button type="submit"  className="mt-6" fullWidth>
           sign up
         </Button>
         <Typography color="gray" className="mt-4 text-center font-normal">
