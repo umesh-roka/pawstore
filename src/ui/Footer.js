@@ -29,6 +29,8 @@ const Footer=()=> {
               </div>
            </div>
            <div className="flex justify-center items-center">
+            
+            {/* map */}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.5230611083264!2d85.307478!3d27.704145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18f93b3d6b79%3A0x94b4e0b8f5df2af4!2zRGhhcmFoYXJhLCBLYXRobWFuZHUsIE5lcGFs!5e0!3m2!1sen!2snp!4v1693299000000!5m2!1sen!2snp"
              width="100%"
