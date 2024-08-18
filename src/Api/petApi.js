@@ -2,9 +2,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { petUrl } from "../constant/constant";
 
 
-
-
-
 export const petApi = createApi({
   reducerPath:'petApi',
   baseQuery:fetchBaseQuery({
