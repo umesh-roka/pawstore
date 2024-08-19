@@ -5,6 +5,7 @@ import Login from './features/auth/Login'
 import Signup from './features/auth/Signup'
 import Home from './features/Home/Home'
 import Breed from './features/components/Breed'
+import AddPetForm from './pets/AddPetForm'
 
 const router = createBrowserRouter([{
 path:'/',
@@ -14,6 +15,8 @@ children:[
 {path:'login',element:<Login/>},
 {path:'signup',element:<Signup/>},
 {path:'breed',element:<Breed/>},
+{path:'addpet',element:<AddPetForm/>},
+
 ]
 }])
 

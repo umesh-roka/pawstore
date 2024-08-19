@@ -7,14 +7,16 @@ export const petApi = createApi({
   baseQuery:fetchBaseQuery({
     baseUrl:petUrl,
   }),
-  endpoints:builder =>({
+
+  
+  endpoints:(builder) =>({
   addPets:builder.mutation({
     query:(query)=>({
    url:'/',
    method:'POST',
    body:query.body,
    headers:{
-    authorization:query.token
+    Authorization:query.token
    }
     })
   })
