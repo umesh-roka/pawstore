@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Card,
   Input,
@@ -8,27 +9,36 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { useFormik } from "formik";
-import { useSelector } from "react-redux";
-import { useAddPetsMutation } from "../Api/petApi";
+import { useFormik } from 'formik';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import { useUpdatePetMutation } from '../../Api/petApi';
+import { imageUrl } from '../../constant/constant';
 
-const AddPetForm = () => {
-  const { user } = useSelector((state) => state.userSlice);
-  const [addPet, { isLoading }] = useAddPetsMutation();
+const petGen = [
+  { label: 'Male', color: 'red', value: 'male' },
+  { label: 'Female', color: 'pink', value: 'female' },
+];
 
-  const { handleSubmit, handleChange, setFieldValue, values } = useFormik({
+const PetEditForm = ({ data }) => {
+  const nav = useNavigate();
+  const{user} = useSelector((state)=>state.userSlice);
+  const [updatePet, { isLoading }] = useUpdatePetMutation();
+
+  const { handleSubmit, handleChange,values,  setFieldValue } = useFormik({
     initialValues: {
-      pet_name: '',
-      pet_detail: '',
-      pet_breed: '',
-      pet_gender: '',
-      pet_price: '',
-      pet_category: '',
-      countInStock: '',
+      pet_name: data.pet_name ,
+      pet_detail: data.pet_detail ,
+      pet_breed: data.pet_breed,
+      pet_gender: data.pet_gender,
+      pet_price: data.pet_price,
+      pet_category: data.pet_category,
+      countInStock: data.countInStock,
       pet_image: null,
-      imageReview: '',
+      imageReview: data.pet_image,
     },
-    onSubmit: async (val) => {
+    onSubmit: async (val,{resetForm}) => {
       const formData = new FormData();
       formData.append('pet_name', val.pet_name);
       formData.append('pet_detail', val.pet_detail);
@@ -37,15 +47,33 @@ const AddPetForm = () => {
       formData.append('pet_category', val.pet_category);
       formData.append('pet_price', Number(val.pet_price));
       formData.append('countInStock', Number(val.countInStock));
-      formData.append('pet_image', val.pet_image);
 
       try {
-        await addPet({body:formData,token:user.token}).unwrap();
-        console.log('Pet added successfully');
+
+        if(val.pet_image === null) {
+
+          await updatePet({
+            id:data._id,
+            body:formData,
+            token:user.token,
+          }).unwrap();
+        }
+        else{
+          formData.append('image', val.pet_image);
+          formData.append('imagePath', data.pet_image);
+          await updatePet({
+            id:data._id,
+            body:formData,
+            token:user.token,
+          }).unwrap();
+        }
+       console.log('success');
+toast.success('updated successfully') 
+nav(-1)     
       } catch (err) {
-        console.error('Failed to add pet:', err);
+        toast.error('something gets wrong')
       }
-    },
+    }
   });
 
   return (
@@ -89,18 +117,23 @@ const AddPetForm = () => {
           <div>
             <h1>Select the Gender</h1>
             {petGen.map((gen, i) => (
-              <Radio
-                key={i}
-                name="pet_gender"
-                onChange={handleChange}
-                label={gen.label}
-                value={gen.value}
-                color={gen.color}
-              />
+              <label key={i} className="inline-flex items-center space-x-2">
+                <Radio
+                  name="pet_gender"
+                  onChange={(e) => setFieldValue('pet_gender', e.target.value)}
+                  value={gen.value}
+                  color={gen.color}
+                  checked={values.pet_gender === gen.value}
+                />
+                <span>{gen.label}</span>
+              </label>
             ))}
           </div>
 
-          <Select onChange={(e) => setFieldValue('pet_category', e)} label="Select Category"         value={values.pet_category}
+          <Select
+            onChange={(e) => setFieldValue('pet_category', e.target.value)}
+            label="Select Category"
+            value={values.pet_category}
           >
             <Option value="Cat">Cat</Option>
             <Option value="Dog">Dog</Option>
@@ -130,32 +163,38 @@ const AddPetForm = () => {
             <h1>Select An Image</h1>
             <Input
               label="Image File"
-              type="file"
-              name="pet_image"
-              accept="image/*"
               onChange={(e) => {
                 const file = e.target.files[0];
-                if (file) {
+               
                   setFieldValue('imageReview', URL.createObjectURL(file));
                   setFieldValue('pet_image', file);
-                }
+                
               }}
+              type="file"
+              name="image"
+             multiple accept="image/*"
+             
             />
-            {values.imageReview && <img src={values.imageReview} alt="Preview" />}
+            {values.imageReview && <img src={values.pet_image === null ? `${imageUrl}${values.imageReview}` : values.imageReview} alt="" />}
           </div>
         </div>
 
-        <Button type="submit" className="mt-6" fullWidth disabled={isLoading}>
-          {isLoading ? 'Adding...' : 'Submit'}
+        <Button type="submit"  className="mt-6" fullWidth disabled={isLoading}>
+          {isLoading ? 'Updating...' : 'Submit'}
         </Button>
       </form>
     </Card>
   );
-};
+}
 
-export default AddPetForm;
+export default PetEditForm;
 
-const petGen = [
-  { label: 'Male', color: 'red', value: 'male' },
-  { label: 'Female', color: 'pink', value: 'female' },
-];
+
+
+
+
+
+
+
+
+

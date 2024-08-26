@@ -132,7 +132,11 @@ const Header =()=> {
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
-       <NavLink to ='/breed'>Breed</NavLink>
+        {user ? (user.isAdmin ? <NavLink to = '/adminpet'>Pets</NavLink>:''): <NavLink to ='/breed'>Pets</NavLink>}
+        
+        
+       
+       
       </Typography>
       <Typography
         as="li"

@@ -8,7 +8,7 @@ export const petApi = createApi({
     baseUrl:petUrl,
   }),
 
-  
+  // adding pet 
   endpoints:(builder) =>({
   addPets:builder.mutation({
     query:(query)=>({
@@ -18,10 +18,66 @@ export const petApi = createApi({
    headers:{
     Authorization:query.token
    }
-    })
+    }),
+    invalidatesTags:['Pet']
+
+  }),
+
+
+  // getting all Pets
+  getPets:builder.query({
+    query:()=>({
+      url:'/',
+      method:'GET',
+    
+    }),
+    providesTags:['Pet']
+  }),
+
+// getting pet by Id
+  getPetById:builder.query({
+    query:(query)=>({
+      url:`/${query}`,
+      method:'GET'
+    }),
+    providesTags:['Pet']
+
+  }),
+
+
+  // update pet
+
+  updatePet: builder.mutation({
+    query: (query) => ({
+      url: `/${query.id}`,
+      body: query.body,
+      method: 'PUT',
+      headers: {
+        Authorization: query.token
+      }
+    }),
+    invalidatesTags: ['Pet']
+  }),
+
+
+  // removePet
+  removePet:builder.mutation({
+    query:(query)=>({
+      url:`/${query.id}`,
+      method:'DELETE',
+      params:{
+        imagePath:query.imagePath,
+      },
+      headers:{
+        Authorization:query.token
+      }
+    }),
+    invalidatesTags:['Pet']
   })
+
   })
 })
 
 
-export const { useAddPetsMutation } = petApi;
+
+export const { useAddPetsMutation, useGetPetsQuery,useGetPetByIdQuery,useRemovePetMutation,useUpdatePetMutation } = petApi;

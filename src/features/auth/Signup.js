@@ -7,6 +7,7 @@ import {
 import { useFormik } from "formik";
 import { useUserSignupMutation } from "../../Api/userApi";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
  
 const Signup = () => {
@@ -21,11 +22,11 @@ const{handleSubmit,handleChange,values} = useFormik({
   onSubmit:async(val)=>{
     try {
   await userSignup(val).unwrap();
-      console.log('success');
+toast.success('Signup successfully')
       nav(-1);
 
     } catch (err) {
-      console.log(err);
+      toast.error(err.data?.message)
     }
   }
 })

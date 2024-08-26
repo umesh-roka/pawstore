@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../Slice/userSlice";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
  
 const Login=()=> {
@@ -25,10 +26,12 @@ const dispatch = useDispatch();
       const response = await userLogin(val).unwrap();
        
       dispatch(addUser(response));
+      toast.success('login successful')
       nav('/');
 
     } catch (err) {
       console.log(err);
+      toast.error(err.data?.message)
     }
   }
  })
