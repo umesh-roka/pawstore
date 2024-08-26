@@ -1,9 +1,11 @@
 import React from 'react'
 import { useParams } from 'react-router'
-import { useSelector } from 'react-redux';
-import { Button, Card, Typography } from '@material-tailwind/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Card, Select, Typography } from '@material-tailwind/react';
 import { useGetPetByIdQuery } from '../../Api/petApi';
 import { imageUrl } from '../../constant/constant';
+import { useFormik } from 'formik';
+import { setToCart } from '../../Slice/cartSlice';
 
 const PetDetail = () => {
 const { id } = useParams();
@@ -24,7 +26,7 @@ console.log(pet.pet_name)
 </div>
 <div className="info space-y-3">
   <h1 className='font-bold text-3xl'>{pet.pet_name}</h1>
-  <p className='text-xl' >{pet.pet_detail}</p>
+  <p className='text-xl' >{pet.pet_detail} </p>
   <p className='text-xl' >Rs.{pet.pet_price}</p>
 
 </div>
@@ -41,8 +43,18 @@ export default PetDetail;
 
 
 export const AddCart = ({ pet }) => {
-
-
+  const dispatch = useDispatch();
+const {carts} = useSelector((state)=>state.cartSlice);
+console.log(carts);
+const isExist = carts.find((cart)=>cart._id === pet._id);
+  const formik = useFormik({
+    initialValues:{
+      qty:1,
+    }
+  })
+const handleSubmit =()=>{
+  dispatch(setToCart({...pet,qty:formik.values.qty}));
+}
   return (
     <Card className="h-full w-full overflow-scroll">
     <table>
@@ -82,7 +94,12 @@ export const AddCart = ({ pet }) => {
 
               <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                 <div>
-         
+                    
+                    <select name='qty' onChange={(e)=>formik.setFieldValue('qty',e.target.value)}>
+                      {[...Array(pet.countInStock).keys()].map((c)=>{
+                        return <option key={c+1} value={c+1}>{c+1}</option>
+                      })}
+                    </select>
             
             </div>
               </th>
@@ -91,7 +108,7 @@ export const AddCart = ({ pet }) => {
         </thead>
     </table>
       <div className='flex justify-center sm:pb-3 pt-7'>
-        <Button>Add To Cart</Button>
+        <Button onClick={handleSubmit}>Add To Cart</Button>
       </div>
     </Card>
   )
