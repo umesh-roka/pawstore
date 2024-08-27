@@ -9,6 +9,7 @@ import PetDetail from './features/pets/PetDetail'
 import AddPetForm from './features/pets/AddPetForm'
 import AdminPet from './features/pets/AdminPet'
 import PetEdit from './features/pets/PetEdit'
+import CartPage from './features/carts/CartPage'
 
 
 const router = createBrowserRouter([{
@@ -23,6 +24,8 @@ children:[
 {path:'adminpet',element:<AdminPet/>},
 {path:'petedit/:id',element:<PetEdit/>},
 {path:'petdetail/:id',element:<PetDetail/>},
+{path:'cartpage',element:<CartPage/>},
+
 
 
 ]

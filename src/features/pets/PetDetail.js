@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Select, Typography } from '@material-tailwind/react';
 import { useGetPetByIdQuery } from '../../Api/petApi';
@@ -43,17 +43,19 @@ export default PetDetail;
 
 
 export const AddCart = ({ pet }) => {
+  const nav = useNavigate();
   const dispatch = useDispatch();
 const {carts} = useSelector((state)=>state.cartSlice);
 console.log(carts);
 const isExist = carts.find((cart)=>cart._id === pet._id);
   const formik = useFormik({
     initialValues:{
-      qty:1,
+      qty:isExist.qty || 1,
     }
   })
 const handleSubmit =()=>{
   dispatch(setToCart({...pet,qty:formik.values.qty}));
+  nav('/cartpage');
 }
   return (
     <Card className="h-full w-full overflow-scroll">
@@ -95,7 +97,7 @@ const handleSubmit =()=>{
               <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                 <div>
                     
-                    <select name='qty' onChange={(e)=>formik.setFieldValue('qty',e.target.value)}>
+                    <select name='qty' value={formik.values.qty} onChange={(e)=>formik.setFieldValue('qty',e.target.value)}>
                       {[...Array(pet.countInStock).keys()].map((c)=>{
                         return <option key={c+1} value={c+1}>{c+1}</option>
                       })}
