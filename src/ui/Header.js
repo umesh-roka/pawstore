@@ -132,7 +132,7 @@ const Header =()=> {
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
-        {user ? (user.isAdmin ? <NavLink to = '/adminpet'>Pets</NavLink>:''): <NavLink to ='/breed'>Pets</NavLink>}
+        {user ? (user.isAdmin ? <NavLink to = '/adminpet'>Pets</NavLink>:<NavLink to ='/breed'>Pets</NavLink>) : <NavLink to ='/breed'>Pets</NavLink>}
         
         
        

@@ -1,35 +1,40 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { clearCartsFromLocal, getCartsFromLocal, setCartsToLocal } from "../shared/localstorage";
 
+import { createSlice } from '@reduxjs/toolkit';
+import { clearCartFromLocal, clearCartsFromLocal, getCartsFromLocal, setCartsToLocal } from '../shared/localstorage';
 
 
 export const cartSlice = createSlice({
   name: 'cartSlice',
   initialState: {
-    carts: getCartsFromLocal()
+    carts: getCartsFromLocal(), // Initialize from local storage
   },
   reducers: {
-    setToCart: (state, action) => {
-      const isExist = state.carts.find((cart) => cart.id === action.payload.id);
-      if (isExist) {
-        state.carts = state.carts.map((cart) => cart.id === action.payload.id ? action.payload : cart);
-        setCartsToLocal(state.carts);
-      } else {
-        state.carts.push(action.payload);
+    addCart: (state, action) => {
+      state.carts.push(action.payload);
+      setCartsToLocal(state.carts);
+    },
+    updateCart: (state, action) => {
+      const index = state.carts.findIndex(cart => cart.id === action.payload.id);
+      if (index !== -1) {
+        state.carts[index] = action.payload;
         setCartsToLocal(state.carts);
       }
-
     },
     removeFromCart: (state, action) => {
       state.carts.splice(action.payload, 1);
       setCartsToLocal([...state.carts]);
     },
-    clearCart: (state, action) => {
+    clearCarts: (state) => {
       state.carts = [];
       clearCartsFromLocal();
-    }
-  }
+    },
+    clearAll: (state) => {
+      state.carts = [];
+      clearCartFromLocal();
+    },
+  },
 });
 
+export const { addCart, updateCart, removeFromCart, clearCarts, clearAll } = cartSlice.actions;
 
-export const { setToCart,removeFromCart,clearCart } = cartSlice.actions;
+

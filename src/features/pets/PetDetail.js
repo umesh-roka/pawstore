@@ -1,12 +1,11 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Card, Select, Typography } from '@material-tailwind/react';
+import { Button, Card, Typography } from '@material-tailwind/react';
 import { useGetPetByIdQuery } from '../../Api/petApi';
 import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
-import { setToCart } from '../../Slice/cartSlice';
-
+import{addCart} from '../../Slice/cartSlice'
 const PetDetail = () => {
 const { id } = useParams();
 const {user} = useSelector((state)=>state.userSlice);
@@ -47,14 +46,16 @@ export const AddCart = ({ pet }) => {
   const dispatch = useDispatch();
 const {carts} = useSelector((state)=>state.cartSlice);
 console.log(carts);
+
 const isExist = carts.find((cart)=>cart._id === pet._id);
   const formik = useFormik({
     initialValues:{
-      qty:isExist.qty || 1,
+      qty:isExist?.qty || 1,
     }
   })
+  
 const handleSubmit =()=>{
-  dispatch(setToCart({...pet,qty:formik.values.qty}));
+  dispatch(addCart({...pet,qty:formik.values.qty}));
   nav('/cartpage');
 }
   return (
@@ -97,12 +98,11 @@ const handleSubmit =()=>{
               <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                 <div>
                     
-                    <select name='qty' value={formik.values.qty} onChange={(e)=>formik.setFieldValue('qty',e.target.value)}>
-                      {[...Array(pet.countInStock).keys()].map((c)=>{
+                    <select name='qty' defaultValue={formik.values.qty} onChange={(e)=>formik.setFieldValue('qty',e.target.value)}>
+                    {[...Array(pet.countInStock).keys()].map((c)=>{
                         return <option key={c+1} value={c+1}>{c+1}</option>
                       })}
                     </select>
-            
             </div>
               </th>
            
