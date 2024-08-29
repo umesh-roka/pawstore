@@ -1,34 +1,35 @@
 import { Avatar, Button, Card, Typography } from "@material-tailwind/react";
-import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { useGetPetsQuery, useRemovePetMutation } from "../../Api/petApi";
+import { useNavigate, useParams } from "react-router";
+// import { useSelector } from "react-redux";
+
 import { imageUrl } from "../../constant/constant";
+import { useGetProductQuery } from "../../Api/productApi";
 
 
-const AdminPet = () => {
-  const {user} = useSelector((state)=>state.userSlice);
+const AdminProduct = () => {
+  // const {user} = useSelector((state)=>state.userSlice);
 const nav = useNavigate();
-const {data,isloading,error} = useGetPetsQuery();
-console.log(data);
-const [removePet] = useRemovePetMutation();
+
+const {data,isloading,error} = useGetProductQuery();
+// const [removeproduct] = useRemoveproductMutation();
 
   const TABLE_HEAD = ["", "Title", "CreatedAt",
     "Edit", "Delete"];
 
-    const handleRemove = async (_id,pet_image)=>{
-      try {
-        await removePet({id:_id,imagePath:pet_image, token:user.token}).unwrap()
-      } catch (err) {
+    // const handleRemove = async (_id,product_image)=>{
+    //   try {
+    //     await removeproduct({id:_id,imagePath:product_image, token:user.token}).unwrap()
+    //   } catch (err) {
         
-      }
-    }
+    //   }
+    // }
  
 
   return (
     <div className="p-5">
       <div className="mb-4 flex justify-between">
         <h1 className="text-2xl font-semibold">Welcome To Pow Store</h1>
-        <Button onClick={()=>nav('/addpet')} className="py-2 px-4" color="orange" size="lg">Add Pets</Button>
+        <Button onClick={()=>nav('/addproduct')} className="py-2 px-4" color="orange" size="lg">Add products</Button>
       </div>
 
       {<Card className="max-w-3xl">
@@ -52,12 +53,12 @@ const [removePet] = useRemovePetMutation();
             </tr>
           </thead>
           <tbody>
-            {data?.data?.map(({ pet_name, pet_image, createdAt,_id }, index) => {
+            {data?.data?.map(({ product_name, product_image, createdAt,_id }, index) => {
              
               return (
                 <tr key={_id}>
                   <td >
-                    <Avatar src={`${imageUrl}${pet_image}`} alt="avatar" />
+                    <Avatar src={`${imageUrl}${product_image}`} alt="avatar" />
                   </td>
                   <td >
                     <Typography
@@ -65,7 +66,7 @@ const [removePet] = useRemovePetMutation();
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {pet_name}
+                      {product_name}
                     </Typography>
                   </td>
                   <td >
@@ -78,11 +79,11 @@ const [removePet] = useRemovePetMutation();
                     </Typography>
                   </td>
                   <td >
-                    <Button onClick={()=>nav(`/petedit/${_id}`)} color="light-green" size="sm">Edit</Button>
+                    <Button onClick={()=>nav(`/productedit/${_id}`)} color="light-green" size="sm">Edit</Button>
                   </td>
 
                   <td >
-                    <Button  onClick={()=> handleRemove(_id,pet_image)} color="red" size="sm" >Delete</Button>
+                    <Button  color="red" size="sm" >Delete</Button>
                   </td>
                 </tr>
               );
@@ -94,7 +95,7 @@ const [removePet] = useRemovePetMutation();
     </div>
   )
 }
-export default AdminPet
+export default AdminProduct
 
 
 

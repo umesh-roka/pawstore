@@ -4,110 +4,81 @@ import {
   Button,
   Typography,
   Textarea,
-  Radio,
-  Select,
-  Option,
+  
 } from "@material-tailwind/react";
 import { useFormik } from "formik";
+import { useAddProductsMutation } from "../../Api/productApi";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { useAddPetsMutation } from "../../Api/petApi";
+import { useNavigate } from "react-router";
 
 const AddProductForm = () => {
   const nav = useNavigate();
-  const { user } = useSelector((state) => state.userSlice);
-  const [addPet, { isLoading }] = useAddPetsMutation();
+ const {user} = useSelector((state)=>state.userSlice);
+const [addProduct,isLoading] = useAddProductsMutation();
+ const {handleChange,handleSubmit,values,setFieldValue} = useFormik({
+  initialValues:{
+    product_name:'',
+    product_price:'',
+    product_detail:'',
+    countInStock:'',
+    category:'',
+    product_image:null,
+    imageReview:''
 
-  const { handleSubmit, handleChange, setFieldValue, values } = useFormik({
-    initialValues: {
-      pet_name: '',
-      pet_detail: '',
-      pet_breed: '',
-      pet_gender: '',
-      pet_price: '',
-      pet_category: '',
-      countInStock: '',
-      pet_image: null,
-      imageReview: '',
-    },
-    onSubmit: async (val) => {
-      const formData = new FormData();
-      formData.append('pet_name', val.pet_name);
-      formData.append('pet_detail', val.pet_detail);
-      formData.append('pet_breed', val.pet_breed);
-      formData.append('pet_gender', val.pet_gender);
-      formData.append('pet_category', val.pet_category);
-      formData.append('pet_price', Number(val.pet_price));
-      formData.append('countInStock', Number(val.countInStock));
-      formData.append('pet_image', val.pet_image);
+  },
+  onSubmit: async (val)=>{
+    const formData = new FormData();
+    formData.append('product_name', val.product_name);
+    formData.append('product_price', Number(val.product_price));
+    formData.append('product_detail',val.product_detail);
+    formData.append('countInStock', Number(val.countInStock));
+    formData.append('category', val.category);
+    formData.append('product_image', val.product_image);
+    try {
+      await addProduct({
+        body:formData,
+        token:user.token
+      }).unwrap();
+      toast.success('success')
+      nav('/adminproduct')
+    } catch (err) {
+      
+    }
+  }
 
-      try {
-        await addPet({body:formData,token:user.token}).unwrap();
-        nav('/adminpet');
-        toast.success('pet added successfully')
-      } catch (err) {
-        toast.error('something wrong')
-
-      }
-    },
-  });
+ })
 
   return (
     <Card color="transparent" shadow={false} className="max-w-sm mx-auto mt-4 mb-4">
       <Typography variant="h4" color="blue-gray">
-        Add Pet
+        Add Product
       </Typography>
 
-      <form onSubmit={handleSubmit} className="mt-2">
+      <form onSubmit={handleSubmit}  className="mt-2">
         <div className="mb-1 flex flex-col gap-3 space-y-2">
           <Input
             size="lg"
-            placeholder="Pet Name"
-            label="Pet Name"
+            placeholder="Product Name"
+            label="Product Name"
             color="orange"
-            name="pet_name"
+            name="product_name"
             onChange={handleChange}
           />
 
-          <Input
-            size="lg"
-            placeholder="Pet Breed"
-            label="Pet Breed"
-            color="orange"
-            name="pet_breed"
-            onChange={handleChange}
-          />
+        
 
           <Input
             size="lg"
-            placeholder="Pet Price"
-            label="Pet Price"
+            placeholder="Product Price"
+            label="Product Price"
             color="orange"
-            name="pet_price"
+            name="product_price"
             onChange={handleChange}
             
           />
 
-          <div>
-            <h1>Select the Gender</h1>
-            {petGen.map((gen, i) => (
-              <Radio
-                key={i}
-                name="pet_gender"
-                onChange={handleChange}
-                label={gen.label}
-                value={gen.value}
-                color={gen.color}
-              />
-            ))}
-          </div>
-
-          <Select onChange={(e) => setFieldValue('pet_category', e)} label="Select Category"   
-          >
-            <Option value="Cat">Cat</Option>
-            <Option value="Dog">Dog</Option>
-          </Select>
+          
 
           <Input
             size="lg"
@@ -118,12 +89,23 @@ const AddProductForm = () => {
             onChange={handleChange}
           />
 
+      <Input
+            size="lg"
+            placeholder="Category"
+            label="Category"
+            color="orange"
+            name="category"
+            onChange={handleChange}
+          />
+
+
+
           <Textarea
             size="lg"
-            placeholder="Pet Detail"
-            label="Pet Detail"
+            placeholder="Product Detail"
+            label="Product Detail"
             color="orange"
-            name="pet_detail"
+            name="product_detail"
             onChange={handleChange}
           />
 
@@ -132,23 +114,22 @@ const AddProductForm = () => {
             <Input
               label="Image File"
               type="file"
-              name="pet_image"
+              name="product_image"
               accept="image/*"
-              onChange={(e) => {
+              onChange={(e)=>{
                 const file = e.target.files[0];
-                if (file) {
-                  setFieldValue('imageReview', URL.createObjectURL(file));
-                  setFieldValue('pet_image', file);
+                if(file){
+                  setFieldValue('imageReview',URL.createObjectURL(file));
+                  setFieldValue('product_image',file);
                 }
               }}
             />
-            {values.imageReview && <img src={values.imageReview} alt="Preview" />}
+           {values.imageReview && <img src = {values.imageReview} alt= ''/>}
           </div>
         </div>
 
-        <Button type="submit"  className="mt-6" fullWidth disabled={isLoading}>
-          {isLoading ? 'Adding...' : 'Submit'}
-        </Button>
+        <Button type="submit"   className="mt-6" fullWidth >
+        Submit</Button>
       </form>
     </Card>
   );
@@ -156,7 +137,3 @@ const AddProductForm = () => {
 
 export default AddProductForm;
 
-const petGen = [
-  { label: 'Male', color: 'red', value: 'male' },
-  { label: 'Female', color: 'pink', value: 'female' },
-];

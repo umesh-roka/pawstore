@@ -20,10 +20,26 @@ export const productApi = createApi({
 
       }),
       invalidatesTags:['Product']
+    }),
+
+    getProduct:builder.query({
+      query:()=>({
+        url:'/',
+        method:'GET',
+      }),
+      providesTags:['Product']
+    }),
+
+    getProductById: builder.query({
+      query: (query)=>({
+        url:`/${query}`,
+        method:'GET'
+      }),
+      providesTags:['Product']
     })
 
   })
 
 })
 
-export const { useAddProductsMutation } = productApi;
+export const { useAddProductsMutation,useGetProductQuery,useGetProductByIdQuery } = productApi;

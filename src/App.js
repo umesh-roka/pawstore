@@ -12,6 +12,9 @@ import PetEdit from './features/pets/PetEdit'
 import CartPage from './features/carts/CartPage'
 import OrderPage from './features/order/OrderPage'
 import AddProductForm from './features/product/AddProductForm'
+import AdminProduct from './features/product/AdminProduct'
+import ProductEdit from './features/product/ProductEdit'
+import Accessories from './features/components/Accessories'
 
 
 
@@ -22,7 +25,7 @@ children:[
 {index:true, element:<Home/>},
 {path:'login',element:<Login/>},
 {path:'signup',element:<Signup/>},
-{path:'breed',element:<Breed/>},
+{path:'pets',element:<Breed/>},
 {path:'addpet',element:<AddPetForm/>},
 {path:'adminpet',element:<AdminPet/>},
 {path:'petedit/:id',element:<PetEdit/>},
@@ -31,6 +34,13 @@ children:[
 {path:'orderpage',element:<OrderPage/>},
 
 {path:'addproduct',element:<AddProductForm/>},
+{path:'adminproduct',element:<AdminProduct/>},
+{path:'productedit/:id',element:<ProductEdit/>},
+{path:'Accessories',element:<Accessories/>},
+
+
+
+
 
 
 

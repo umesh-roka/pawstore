@@ -62,7 +62,6 @@ export const petApi = createApi({
 
 
 
-
   // removePet
   removePet:builder.mutation({
     query:(query)=>({

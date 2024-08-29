@@ -1,6 +1,8 @@
 import React from 'react'
 import Caro from './Caro'
 import Breed from '../components/Breed'
+import Accessories from '../components/Accessories'
+import { Typography } from '@material-tailwind/react'
 
 const Home = () => {
   return (
@@ -16,6 +18,29 @@ const Home = () => {
 <div>
  <Breed/>
  </div>
+ <figure className="relative h-96 my-7 ">
+       <img
+         className="h-full   object-cover w-full object-center"
+         src="https://www.k9ofmine.com/wp-content/uploads/2019/08/nature-dog-names.jpg"
+         alt="nature img"
+       />
+       <figcaption className="absolute bottom-8 left-12  ">
+         <div>
+           <Typography variant="h5"  color="white">
+           "Unspoken love, endless loyalty—where paws meet hearts, a bond is forever formed."
+           </Typography>
+           </div>
+       </figcaption>
+     </figure>
+ <div>
+  <Accessories/>
+ </div>
+
+ 
+ 
+     
+
+
 </>
   )
 }
