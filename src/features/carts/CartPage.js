@@ -34,7 +34,7 @@ const total = carts.reduce((a,b)=>a + b.qty * b.pet_price,0)
 
           {carts.map((cart)=>{
             return <div className='' key={cart._id}>
-             <div><img className='h-[200px] w-[200px]' src={`${imageUrl}${cart.pet_image}`} alt="" />
+             <div><img className=' rounded-lg h-[200px] w-[200px]' src={`${imageUrl}${cart.pet_image}`} alt="" />
              <h1 className='ml-12'>Rs.{cart.pet_price}</h1>
              <h1>Total Price: {total}</h1>
              </div>

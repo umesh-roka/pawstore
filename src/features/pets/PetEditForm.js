@@ -50,7 +50,7 @@ const PetEditForm = ({ data }) => {
 
       try {
 
-        if(val.pet_image === null) {
+        if(!val.pet_image === null) {
 
           await updatePet({
             id:data._id,
@@ -172,7 +172,8 @@ nav(-1)
               }}
               type="file"
               name="image"
-             multiple accept="image/*"
+             multiple 
+             accept="image/*"
              
             />
             {values.imageReview && <img src={values.pet_image === null ? `${imageUrl}${values.imageReview}` : values.imageReview} alt="" />}
