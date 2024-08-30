@@ -13,6 +13,8 @@ const {carts} = useSelector((state)=>state.cartSlice);
 
 const total = carts.reduce((a,b)=>a + b.qty * b.pet_price,0)
 
+
+
   const formik = useFormik({
     initialValues:{
       qty: 1,
@@ -34,9 +36,15 @@ const total = carts.reduce((a,b)=>a + b.qty * b.pet_price,0)
 
           {carts.map((cart)=>{
             return <div className='' key={cart._id}>
-             <div><img className=' rounded-lg h-[200px] w-[200px]' src={`${imageUrl}${cart.pet_image}`} alt="" />
-             <h1 className='ml-12'>Rs.{cart.pet_price}</h1>
-             <h1>Total Price: {total}</h1>
+             <div>
+              
+              {cart.pet_image ? <div><img className=' rounded-lg h-[200px] w-[200px]' src={`${imageUrl}${cart.pet_image}`} alt="" />
+              <h1 className='ml-12'>Rs.{cart.pet_price}</h1>
+             
+              </div>:<div>
+              <img className=' rounded-lg h-[200px] w-[200px]' src={`${imageUrl}${cart.product_image}`} alt="" /> 
+              <h1 className='ml-12'>Rs.{cart.product_price}</h1>
+              </div>}
              </div>
 
               
@@ -45,6 +53,7 @@ const total = carts.reduce((a,b)=>a + b.qty * b.pet_price,0)
                         return <option key={c+1} value={c+1}>{c+1}</option>
                       })}
                     </select>
+                    <h1>Total Price: {total}</h1>
                     </div>
                     <div><Button onClick={()=>removeCart(cart._id)} color='red'>Delete</Button></div>
             </div>

@@ -15,6 +15,7 @@ import AddProductForm from './features/product/AddProductForm'
 import AdminProduct from './features/product/AdminProduct'
 import ProductEdit from './features/product/ProductEdit'
 import Accessories from './features/components/Accessories'
+import ProductDetail from './features/product/ProductDetail'
 
 
 
@@ -36,6 +37,8 @@ children:[
 {path:'addproduct',element:<AddProductForm/>},
 {path:'adminproduct',element:<AdminProduct/>},
 {path:'productedit/:id',element:<ProductEdit/>},
+{path:'productdetail/:id',element:<ProductDetail/>},
+
 {path:'Accessories',element:<Accessories/>},
 
 

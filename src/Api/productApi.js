@@ -8,6 +8,7 @@ export const productApi = createApi({
     baseUrl:productUrl,
   }),
 
+  // addProduct
   endpoints:(builder)=>({
     addProducts: builder.mutation({
       query:(query)=>({
@@ -22,6 +23,7 @@ export const productApi = createApi({
       invalidatesTags:['Product']
     }),
 
+    // get all products
     getProduct:builder.query({
       query:()=>({
         url:'/',
@@ -30,16 +32,32 @@ export const productApi = createApi({
       providesTags:['Product']
     }),
 
+    //getProduct by id
+
     getProductById: builder.query({
       query: (query)=>({
         url:`/${query}`,
         method:'GET'
       }),
       providesTags:['Product']
+    }),
+
+
+// updateProduct
+    updateProduct: builder.mutation({
+      query:(query)=>({
+        url:`/${query.id}`,
+        method:'PUT',
+        body:query.body,
+        headers:{
+          Authorization:query.token
+        }
+      }),
+      invalidatesTags:['Product']
     })
 
   })
 
 })
 
-export const { useAddProductsMutation,useGetProductQuery,useGetProductByIdQuery } = productApi;
+export const { useAddProductsMutation,useGetProductQuery,useGetProductByIdQuery,useUpdateProductMutation } = productApi;

@@ -17,4 +17,4 @@ const ProductEdit = () => {
   )
 }
 
-export default ProductEdit
+export default ProductEdit;
