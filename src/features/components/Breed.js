@@ -1,73 +1,3 @@
-// import {
-//   Card,
-//   CardHeader,
-//   CardBody,
-//   Typography,
-//   CardFooter,
-
-// } from "@material-tailwind/react";
-
-// import {
-//   Button,
-//   Tooltip,
-//   IconButton,
-// } from "@material-tailwind/react";
- 
-// import { useGetPetsQuery } from "../../Api/petApi";
-// import { imageUrl } from "../../constant/constant";
-// import { useNavigate } from "react-router";
- 
-// const Breed=()=> {
-
-// const {data,isLoading} = useGetPetsQuery();
-// console.log(data);
-// const nav = useNavigate();
-//   return (
-  
-
-//     <div className='bg-gray-100 pb-8 '>
-//       <h1 className='font-bold text-4xl uppercase text-center pt-6 '>All Pets</h1>
-//     <div className="mt-7 sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
-
-//       {data?.data.map(({ _id, pet_name, pet_detail,pet_category, pet_image }) => {
-//         return  <Card className=" sm:w-[190px] lg:w-[250px] lg:h-[350px]  bg-orange-100 shadow-lg">
-//         <CardHeader floated={false} color="blue-gray">
-//           <img
-//           className="lg:h-[150px] lg:w-full"
-//             src={`${imageUrl}${pet_image}`}
-//             alt="ui/ux review check"
-//           />
-//         </CardHeader>
-//         <CardBody>
-//             <Typography className=" font-bold text-lg">
-//               {pet_name}
-//             </Typography>
-//             <Typography className='truncate'>
-//               {pet_category}
-//             </Typography>
-//             <Typography className='truncate'>
-//               {pet_detail}
-//             </Typography>
-//           </CardBody>
-//           <CardFooter className="pt-0  sm:text-sm">
-//             <button className=' bg-black text-white px-4 py-1 rounded-lg sm:text-sm font-bold' onClick={() => nav(`/petdetail/${_id}`)}>More</button>
-//           </CardFooter>
-    
-//       </Card>
-      
-//       })}
-
-
-// </div>
-//     </div>
- 
-
-    
-//   );
-// }
-
-// export default Breed;
-
 
 
 
@@ -85,7 +15,7 @@ import { useLocation, useNavigate } from "react-router";
 
 const Breed = () => {
   const location = useLocation()
-   const isBreedPage = location.pathname === '/breed'
+   const isBreedPage = location.pathname === '/pets'
   const { data, isLoading } = useGetPetsQuery();
   const [selectedCategory, setSelectedCategory] = useState('All'); // State for selected category
   const nav = useNavigate();

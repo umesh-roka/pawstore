@@ -160,6 +160,8 @@ const Header =()=> {
       >
        <NavLink>Contact</NavLink>
 
+       </Typography>
+
        {/* search */}
        <div className="hidden items-center  gap-x-2 lg:flex">
           <div className="relative flex w-full gap-2 md:w-max">
@@ -201,20 +203,37 @@ const Header =()=> {
             Search
           </Button>
           </div>
+
+              {/* cart */}
+<div className="px-3">
+  <NavLink to='cartpage'>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
+  <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
+</svg>
+  </NavLink>
+
+
+</div>
+
+{/* login */}
+
          {!user&& (<NavLink to='login' className=''>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
   <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
 </svg>
 </NavLink>) }
+
+
+
         </div>
-      </Typography>
+     
     </ul>
   );
  
   return (
     <div className="sticky top-0 z-50">
     <Navbar className=" bg-orange-100 px-4 rounded-none py-2 lg:px-8 lg:py-4">
-      <div className="flex lg:mx-[200px] flex-wrap items-center justify-between text-blue-gray-900">
+      <div className="flex lg:mx-[180px] flex-wrap items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           href="/"

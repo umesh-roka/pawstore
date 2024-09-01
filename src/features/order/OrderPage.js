@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Card,
   Input,
@@ -7,173 +7,195 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-
-
 import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 
-
-
 const OrderPage = () => {
 
-  const {carts} = useSelector((state)=>state.cartSlice);
-  const total = carts.reduce((a,b)=>a + b.qty * b.pet_price,0)
-  console.log(total);
-    const formik = useFormik({
-      initialValues:{
-        qty: 1,
-      }
-    })
+  const { carts } = useSelector((state) => state.cartSlice);
+
+  // Calculate the total price for all items in the cart
+  const total = carts.reduce((a, b) => a + b.qty * (b.pet_price || b.product_price), 0);
+
+  // Formik setup for form handling
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      name: '',
+      province: '',
+      district: '',
+      street: '',
+      phone: '',
+    },
+    onSubmit: (values) => {
+      // Handle the form submission here
+      console.log('Order details:', values);
+      console.log('Cart items:', carts);
+      console.log('Total price:', total);
+      // You can now send this data to your backend or handle it as needed
+    },
+  });
 
   return (
     <div>
-    <div className='grid grid-cols-2 my-8'>
-    
-      <div>
-      {carts === 0 ? <h1>cart is empty </h1>:
-      <div >
-        
-
-        <div className='grid grid-cols-3 mx-[10px]'>
-
-          {carts.map((cart)=>{
-            return <div className='' key={cart._id}>
-             <div><img className='rounded-lg h-[200px] w-[200px]' src={`${imageUrl}${cart.pet_image}`} alt="" />
-             <h1 className='ml-12'>Rs.{cart.pet_price}</h1>
-            
-             </div>
-
-              
-              <div>{cart.qty}</div>
-                   
+      <div className='grid lg:grid-cols-2 sm:grid-cols-1 my-8'>
+        <div>
+          {carts.length === 0 ? (
+            <h1>Cart is empty</h1>
+          ) : (
+            <div>
+              <div className='grid grid-cols-3 mx-[10px]'>
+                {carts.map((cart) => (
+                  <div className='' key={cart._id}>
+                    <div>
+                      {cart.pet_image ? (
+                        <div>
+                          <img className='rounded-lg h-[200px] w-[200px]' src={`${imageUrl}${cart.pet_image}`} alt="" />
+                          <h1 className='font-bold text-xl'>{cart.pet_name}</h1>
+                          <h1 className=''>Rs.{cart.pet_price}</h1>
+                        </div>
+                      ) : (
+                        <div>
+                          <img className='rounded-lg h-[200px] w-[200px]' src={`${imageUrl}${cart.product_image}`} alt="" />
+                          <h1 className='font-bold text-xl'>{cart.product_name}</h1>
+                          <h1 className=''>Rs.{cart.product_price}</h1>
+                        </div>
+                      )}
+                    </div>
+                    <div>Quantity: {cart.qty}</div>
+                  </div>
+                ))}
+                 
+              </div>
+              <h1 className='uppercase font-bold my-20 text-xl'>Total: Rs.{total}</h1>
             </div>
-          })
-          }
+          )}
         </div>
-       
-        
-        </div>}
-    </div>
+
+        <div>
+          <Card color="transparent" className="flex justify-center items-center" shadow={false}>
+            <Typography color="black" className="mt-1 uppercase font-bold text-2xl">
+              Enter your details for the order
+            </Typography>
+            <form onSubmit={formik.handleSubmit} className="mt-8 mb-2 w-[500px] max-w-screen-lg sm:w-96">
+              <div className="mb-1 flex flex-col gap-6">
+                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                  Contact
+                </Typography>
+                <Input
+                  name="email"
+                  type="email"
+                  size="lg"
+                  placeholder="abc123@gmail.com"
+                  className="!border-t-blue-gray-200 focus:!border-orange-700"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                />
+
+                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                  Your Full Name
+                </Typography>
+                <Input
+                  name="name"
+                  size="lg"
+                  placeholder="Full Name"
+                  className="!border-t-blue-gray-200 focus:!border-orange-700"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
+                />
+
+                <div className='grid  sm:grid-rows-1 lg:flex'>
+                  <div className='flex flex-col'>
+                    <Typography variant="h6" color="blue-gray" className="-mb-3 pb-6">
+                      Select Your Province
+                    </Typography>
+                    <Select
+                      label="Select Province"
+                      placeholder="Select Province"
+                      color="orange"
+                      name="province"
+                      onChange={(value) => formik.setFieldValue('province', value)}
+                      value={formik.values.province}
+                    >
+                      <Option value="Koshi">Koshi</Option>
+                      <Option value="Madesh">Madesh</Option>
+                      <Option value="Bagmati">Bagmati</Option>
+                      <Option value="Gandaki">Gandaki</Option>
+                      <Option value="Lumbini">Lumbini</Option>
+                      <Option value="Karnali">Karnali</Option>
+                      <Option value="Sudurpashchim">Sudurpashchim</Option>
+                    </Select>
+                  </div>
+
+                  <div className='flex flex-col sm:my-2 lg:space-x-3'>
+                    <Typography variant="h6" color="blue-gray" className="-mb-3 pb-6">
+                      Enter Your District
+                    </Typography>
+                    <Input
+                      name="district"
+                      size="lg"
+                      placeholder="e.g., Pokhara"
+                      className="lg:w-[170px] !border-t-blue-gray-200 focus:!border-orange-700"
+                      labelProps={{
+                        className: "before:content-none after:content-none",
+                      }}
+                      onChange={formik.handleChange}
+                      value={formik.values.district}
+                    />
+                  </div>
+
+                  <div className='flex flex-col'>
+                    <Typography variant="h6" color="blue-gray" className="-mb-3 pb-6">
+                      Enter Your Street
+                    </Typography>
+                    <Input
+                      name="street"
+                      size="lg"
+                      placeholder="e.g., Street Name"
+                      className="!border-t-blue-gray-200 focus:!border-orange-700"
+                      labelProps={{
+                        className: "before:content-none after:content-none",
+                      }}
+                      onChange={formik.handleChange}
+                      value={formik.values.street}
+                    />
+                  </div>
+                </div>
+
+                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                  Phone Number
+                </Typography>
+                <Input
+                  name="phone"
+                  size="lg"
+                  type="number"
+                  placeholder="Phone Number"
+                  className="!border-t-blue-gray-200 focus:!border-orange-700"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  onChange={formik.handleChange}
+                  value={formik.values.phone}
+                />
+              </div>
+
+              <Button type="submit" className="mt-6 uppercase" fullWidth>
+                Order Now
+              </Button>
+            </form>
+          </Card>
+        </div>
+      </div>
      
-
-
-
-      <div>
-      <Card color="transparent" className="flex justify-center items-center " shadow={false}>
-  
-  <Typography color="black" className="mt-1 uppercase font-bold text-2xl">
-    Enter your details for order.
-  </Typography>
-  <form   className="mt-8 mb-2 w-[500px] max-w-screen-lg sm:w-96">
-    <div className="mb-1 flex flex-col gap-6">
-
-    <Typography variant="h6" color="blue-gray" className="-mb-3">
-        Contact
-      </Typography>
-      <Input
-      name="email"
-      type='email'
-        size="lg"
-        placeholder="acb123@gmail.com"
-        className=" !border-t-blue-gray-200 focus:!border-orange-700"
-        labelProps={{
-          className: "before:content-none after:content-none",
-        }}
-      />
-     
-      <Typography variant="h6" color="blue-gray" className="-mb-3">
-        Your Full Name
-      </Typography>
-      <Input
-      name="name"
-        size="lg"
-        placeholder="Full Name"
-        className=" !border-t-blue-gray-200 focus:!border-orange-700"
-        labelProps={{
-          className: "before:content-none after:content-none",
-        }}
-      />
-
-<div className='flex'>
-  <div className='flex flex-col'>
-    <Typography variant="h6" color="blue-gray" className="-mb-3 pb-6">
-        Select Your Provience
-      </Typography>
-      
-      <Select label='Select Provience' placeholder="Select Provience" color='orange'
-     >
-        <Option>Koshi</Option>
-        <Option>Madesh</Option>
-        <Option>Bagmati</Option>
-        <Option>Gandaki</Option>
-        <Option>Lumbini</Option>
-        <Option>Karnali</Option>
-        <Option>Sudurpashchim</Option>
-
-      </Select>
-      </div>
-  <div className='flex flex-col space-x-3'> 
-     <Typography variant="h6" color="blue-gray" className="-mb-3 pb-6">
-        Enter Your District
-      </Typography>
-      <Input
-      name="district"
-        size="lg"
-        placeholder="eg:Pokhara"
-        className=" w-[180px] !border-t-blue-gray-200 focus:!border-orange-700"
-        labelProps={{
-          className: "before:content-none after:content-none",
-        }}
-      />
-      </div>
-  <div className='flex flex-col'>
-    <Typography variant="h6" color="blue-gray" className="-mb-3 pb-6">
-        Enter Your Street
-      </Typography>
-      <Input
-      name="street"
-        size="lg"
-        placeholder="eg:street name"
-        className=" !border-t-blue-gray-200 focus:!border-orange-700"
-        labelProps={{
-          className: "before:content-none after:content-none",
-        }}
-      />
-      </div>
-</div>
-<Typography variant="h6" color="blue-gray" className="-mb-3">
-        Phone Number
-      </Typography>
-      <Input
-      name="phone"
-        size="lg"
-        type='number'
-        placeholder="phone number"
-        className=" !border-t-blue-gray-200 focus:!border-orange-700"
-        labelProps={{
-          className: "before:content-none after:content-none",
-        }}
-      />
     </div>
-    
-    <Button type="submit" className="mt-6 uppercase" fullWidth>
-     order now
-    </Button>
-   
-  </form>
-</Card>
-      </div>
-    </div>
-    <h1 className='uppercase font-bold text-xl'>Total:{total}</h1>
-   </div>
-  )
+  );
 }
 
-export default OrderPage
-
-
-
-
-
-
+export default OrderPage;

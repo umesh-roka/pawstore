@@ -32,9 +32,16 @@ export const cartSlice = createSlice({
       state.carts = [];
       clearCartFromLocal();
     },
+    updateCartQuantity: (state, action) => {
+      const { _id, qty } = action.payload;
+      const cartItem = state.carts.find(item => item._id === _id);
+      if (cartItem) {
+        cartItem.qty = qty;
+      }
+    },
   },
 });
 
-export const { addCart, updateCart, removeFromCart, clearCarts, clearAll } = cartSlice.actions;
+export const { addCart, updateCart, removeFromCart, clearCarts, clearAll,updateCartQuantity } = cartSlice.actions;
 
 

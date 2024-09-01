@@ -14,10 +14,10 @@ if(isLoading){
   return <div>loading...</div>
 }
 const product = data?.data;
-console.log(product.product_name)
+
   return (
     <div className='my-4'>
-  <h1 className='font-bold text-4xl ml-16 uppercasev'>product Detail</h1>
+  <h1 className='font-bold text-4xl ml-16 uppercasev'>Product Detail</h1>
  <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
 
 <div className="image">
@@ -30,8 +30,9 @@ console.log(product.product_name)
 
 </div>
 
-{/* {user === null ? '' : (user.isAdmin ? '' : (product && <AddCart product={product} />))} */}
-<AddCart product={product} />
+{user === null ? <AddCart product={product} /> : (user.isAdmin ? '' : (product && <AddCart product={product} />))}
+
+
 </div>
     </div>
   )
