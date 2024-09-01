@@ -35,7 +35,20 @@ const Home = () => {
  <div>
   <Accessories/>
  </div>
-
+ <figure className="relative h-96 my-7 ">
+       <img
+         className="h-full   object-fill w-full object-center"
+         src="https://mymodernmet.com/wp/wp-content/uploads/2020/12/dog-photography-audrey-bellot-3.jpg"
+         alt="nature img"
+       />
+       <figcaption className="absolute bottom-8 left-12  ">
+         <div>
+           <Typography variant="h5"  color="white">
+           "Pets and humans share a friendship where every moment is a silent promise of unconditional love."
+           </Typography>
+           </div>
+       </figcaption>
+     </figure>
  
  
      

@@ -16,6 +16,7 @@ import AdminProduct from './features/product/AdminProduct'
 import ProductEdit from './features/product/ProductEdit'
 import Accessories from './features/components/Accessories'
 import ProductDetail from './features/product/ProductDetail'
+import Ordered from './features/order/Ordered'
 
 
 
@@ -40,6 +41,8 @@ children:[
 {path:'productdetail/:id',element:<ProductDetail/>},
 
 {path:'Accessories',element:<Accessories/>},
+{path:'order',element:<Ordered/>},
+
 
 
 

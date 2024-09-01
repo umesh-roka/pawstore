@@ -10,30 +10,80 @@ import {
 import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
+import { usePlaceOrderMutation } from '../../Api/orderApi';
+import { toast } from 'react-toastify';
+
 
 const OrderPage = () => {
-
   const { carts } = useSelector((state) => state.cartSlice);
+  const { user } = useSelector((state) => state.userSlice);
 
   // Calculate the total price for all items in the cart
   const total = carts.reduce((a, b) => a + b.qty * (b.pet_price || b.product_price), 0);
 
-  // Formik setup for form handling
-  const formik = useFormik({
+  const [placeOrder] = usePlaceOrderMutation(); // Use the mutation hook
+
+  const { handleSubmit, handleChange, values, setFieldValue } = useFormik({
     initialValues: {
-      email: '',
-      name: '',
+   
+      email: user.email || '',
+      name: user.username || '',
       province: '',
       district: '',
       street: '',
       phone: '',
     },
-    onSubmit: (values) => {
-      // Handle the form submission here
-      console.log('Order details:', values);
-      console.log('Cart items:', carts);
-      console.log('Total price:', total);
-      // You can now send this data to your backend or handle it as needed
+    onSubmit: async (val) => {
+      // Debugging: Log the form values to check their content
+      console.log('Form values:', val); 
+
+      if (!val) {
+        console.error('Form values are undefined or null');
+        alert('There was an error with your form data. Please try again.');
+        return;
+      }
+
+      // Validate presence of required fields
+      const missingFields = [];
+      ['email', 'name', 'phone', 'province', 'district', 'street'].forEach(field => {
+        if (!val[field]) {
+          missingFields.push(field);
+        }
+      });
+
+      if (missingFields.length > 0) {
+        console.error('Missing required fields:', missingFields.join(', '));
+        alert(`Please fill in the following fields: ${missingFields.join(', ')}`);
+        return;
+      }
+
+      try {
+        const order = {
+          userDetail: {
+            email: val.email,
+            name: val.name,
+            phone: val.phone,
+
+          },
+          address: {
+            province: val.province,
+            district: val.district,
+            street: val.street
+          },
+          items: carts.map(cart => ({
+            name: cart.pet_name || cart.product_name,
+            price: cart.pet_price || cart.product_price,
+            qty: cart.qty,
+            image: cart.pet_image || cart.product_image
+          })),
+          total
+        };
+
+        await placeOrder({body:order,token:user.token}).unwrap(); // Trigger the mutation and unwrap the response
+          toast.success('ordered successfully')
+      } catch (error) {
+        toast.error('something gets wrong');
+      }
     },
   });
 
@@ -66,7 +116,6 @@ const OrderPage = () => {
                     <div>Quantity: {cart.qty}</div>
                   </div>
                 ))}
-                 
               </div>
               <h1 className='uppercase font-bold my-20 text-xl'>Total: Rs.{total}</h1>
             </div>
@@ -78,7 +127,7 @@ const OrderPage = () => {
             <Typography color="black" className="mt-1 uppercase font-bold text-2xl">
               Enter your details for the order
             </Typography>
-            <form onSubmit={formik.handleSubmit} className="mt-8 mb-2 w-[500px] max-w-screen-lg sm:w-96">
+            <form onSubmit={handleSubmit} className="mt-8 mb-2 w-[500px] max-w-screen-lg sm:w-96">
               <div className="mb-1 flex flex-col gap-6">
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
                   Contact
@@ -92,8 +141,8 @@ const OrderPage = () => {
                   labelProps={{
                     className: "before:content-none after:content-none",
                   }}
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
+                  onChange={handleChange}
+                  value={values.email}
                 />
 
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -107,11 +156,11 @@ const OrderPage = () => {
                   labelProps={{
                     className: "before:content-none after:content-none",
                   }}
-                  onChange={formik.handleChange}
-                  value={formik.values.name}
+                  onChange={handleChange}
+                  value={values.name}
                 />
 
-                <div className='grid  sm:grid-rows-1 lg:flex'>
+                <div className='grid sm:grid-rows-1 lg:flex'>
                   <div className='flex flex-col'>
                     <Typography variant="h6" color="blue-gray" className="-mb-3 pb-6">
                       Select Your Province
@@ -121,8 +170,8 @@ const OrderPage = () => {
                       placeholder="Select Province"
                       color="orange"
                       name="province"
-                      onChange={(value) => formik.setFieldValue('province', value)}
-                      value={formik.values.province}
+                      onChange={(value) => setFieldValue('province', value)}
+                      value={values.province || ''} // Ensure the value is correctly handled
                     >
                       <Option value="Koshi">Koshi</Option>
                       <Option value="Madesh">Madesh</Option>
@@ -146,8 +195,8 @@ const OrderPage = () => {
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}
-                      onChange={formik.handleChange}
-                      value={formik.values.district}
+                      onChange={handleChange}
+                      value={values.district}
                     />
                   </div>
 
@@ -163,8 +212,8 @@ const OrderPage = () => {
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}
-                      onChange={formik.handleChange}
-                      value={formik.values.street}
+                      onChange={handleChange}
+                      value={values.street}
                     />
                   </div>
                 </div>
@@ -175,14 +224,14 @@ const OrderPage = () => {
                 <Input
                   name="phone"
                   size="lg"
-                  type="number"
+                  type="text" // Use "text" for various phone formats
                   placeholder="Phone Number"
                   className="!border-t-blue-gray-200 focus:!border-orange-700"
                   labelProps={{
                     className: "before:content-none after:content-none",
                   }}
-                  onChange={formik.handleChange}
-                  value={formik.values.phone}
+                  onChange={handleChange}
+                  value={values.phone}
                 />
               </div>
 
@@ -193,7 +242,6 @@ const OrderPage = () => {
           </Card>
         </div>
       </div>
-     
     </div>
   );
 }
