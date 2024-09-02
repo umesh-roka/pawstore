@@ -31,16 +31,35 @@ export const orderApi = createApi({
       }),
       providesTags:['Order']
    }),
-   getOrderById: builder.query({
+
+
+
+   getOrderByUser:builder.query({
     query:(query)=>({
-      url:`/${query}`,
-      method:'GET'
+      url:`/user/${query.id}`,
+      method:'GET',
+      headers:{
+        Authorization:query.token
+      }
     }),
     providesTags:['Order']
-   })
+   }),
+
+
+
+   getOrderById: builder.query({
+    query:(query)=>({
+      url:`/${query.id}`,
+      method:'GET',
+      headers:{
+        Authorization:query.token
+      }
+    }),
+    providesTags:['Order']
+   }),
 
   })
 })
 
 
-export const {usePlaceOrderMutation,useGetAllorderQuery,useGetOrderByIdQuery} = orderApi;
+export const {usePlaceOrderMutation,useGetAllorderQuery,useGetOrderByIdQuery,useGetOrderByUserQuery} = orderApi;

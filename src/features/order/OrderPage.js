@@ -13,7 +13,6 @@ import { useSelector } from 'react-redux';
 import { usePlaceOrderMutation } from '../../Api/orderApi';
 import { toast } from 'react-toastify';
 
-
 const OrderPage = () => {
   const { carts } = useSelector((state) => state.cartSlice);
   const { user } = useSelector((state) => state.userSlice);
@@ -34,36 +33,13 @@ const OrderPage = () => {
       phone: '',
     },
     onSubmit: async (val) => {
-      // Debugging: Log the form values to check their content
-      console.log('Form values:', val); 
-
-      if (!val) {
-        console.error('Form values are undefined or null');
-        alert('There was an error with your form data. Please try again.');
-        return;
-      }
-
-      // Validate presence of required fields
-      const missingFields = [];
-      ['email', 'name', 'phone', 'province', 'district', 'street'].forEach(field => {
-        if (!val[field]) {
-          missingFields.push(field);
-        }
-      });
-
-      if (missingFields.length > 0) {
-        console.error('Missing required fields:', missingFields.join(', '));
-        alert(`Please fill in the following fields: ${missingFields.join(', ')}`);
-        return;
-      }
-
+     
       try {
         const order = {
           userDetail: {
             email: val.email,
             name: val.name,
             phone: val.phone,
-
           },
           address: {
             province: val.province,

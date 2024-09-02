@@ -17,6 +17,8 @@ import ProductEdit from './features/product/ProductEdit'
 import Accessories from './features/components/Accessories'
 import ProductDetail from './features/product/ProductDetail'
 import Ordered from './features/order/Ordered'
+import UserOrder from './features/order/UserOrder'
+import OrderDetail from './features/order/OrderDetail'
 
 
 
@@ -42,6 +44,10 @@ children:[
 
 {path:'Accessories',element:<Accessories/>},
 {path:'order',element:<Ordered/>},
+{path:'userorder',element:<UserOrder/>},
+{path:'order/:id',element:<OrderDetail/>}
+
+
 
 
 
