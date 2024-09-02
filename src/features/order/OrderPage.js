@@ -12,6 +12,7 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { usePlaceOrderMutation } from '../../Api/orderApi';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
 
 const OrderPage = () => {
   const { carts } = useSelector((state) => state.cartSlice);
@@ -20,8 +21,8 @@ const OrderPage = () => {
   // Calculate the total price for all items in the cart
   const total = carts.reduce((a, b) => a + b.qty * (b.pet_price || b.product_price), 0);
 
-  const [placeOrder] = usePlaceOrderMutation(); // Use the mutation hook
-
+  const [placeOrder] = usePlaceOrderMutation(); 
+const nav = useNavigate();
   const { handleSubmit, handleChange, values, setFieldValue } = useFormik({
     initialValues: {
    
@@ -57,6 +58,7 @@ const OrderPage = () => {
 
         await placeOrder({body:order,token:user.token}).unwrap(); // Trigger the mutation and unwrap the response
           toast.success('ordered successfully')
+          nav('/userorder')
       } catch (error) {
         toast.error('something gets wrong');
       }

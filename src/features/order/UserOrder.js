@@ -93,4 +93,4 @@ const UserOrder = () => {
   )
 }
 
-export default UserOrder
+export default UserOrder;

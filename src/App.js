@@ -19,6 +19,7 @@ import ProductDetail from './features/product/ProductDetail'
 import Ordered from './features/order/Ordered'
 import UserOrder from './features/order/UserOrder'
 import OrderDetail from './features/order/OrderDetail'
+import UserProfile from './features/auth/UserProfile'
 
 
 
@@ -29,6 +30,13 @@ children:[
 {index:true, element:<Home/>},
 {path:'login',element:<Login/>},
 {path:'signup',element:<Signup/>},
+{path:'userprofile',element:<UserProfile/>},
+
+
+
+
+
+
 {path:'pets',element:<Breed/>},
 {path:'addpet',element:<AddPetForm/>},
 {path:'adminpet',element:<AdminPet/>},
@@ -46,6 +54,9 @@ children:[
 {path:'order',element:<Ordered/>},
 {path:'userorder',element:<UserOrder/>},
 {path:'order/:id',element:<OrderDetail/>}
+
+
+
 
 
 
