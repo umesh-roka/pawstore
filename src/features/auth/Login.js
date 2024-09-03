@@ -7,7 +7,7 @@ import {
 import { useUserLoginMutation } from "../../Api/userApi";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../Slice/userSlice";
+import {  setUser } from "../../Slice/userSlice";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
@@ -25,7 +25,7 @@ const dispatch = useDispatch();
     try {
       const response = await userLogin(val).unwrap();
        
-      dispatch(addUser(response));
+      dispatch(setUser(response));
       toast.success('login successful')
       nav('/');
 

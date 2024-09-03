@@ -15,7 +15,7 @@ import {
 } from "@material-tailwind/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ChevronDownIcon, Cog6ToothIcon, PowerIcon, UserCircleIcon } from "@heroicons/react/16/solid";
+import { ChevronDownIcon, Cog6ToothIcon, PowerIcon, ShoppingCartIcon, UserCircleIcon } from "@heroicons/react/16/solid";
 import { userLogout } from "../Slice/userSlice";
  
 // userProfile
@@ -68,7 +68,7 @@ function ProfileMenu({ user }) {
         >
           <Avatar
             variant="circular"
-            size="sm"
+            size="md"
             alt="User Avatar"
             className="border border-gray-900 p-0.5"
             src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -111,6 +111,9 @@ function ProfileMenu({ user }) {
 
 
 const Header =()=> {
+  const {carts} = useSelector((state)=>state.cartSlice);
+  const totalItems = carts.reduce((sum, item) => sum + (Array.isArray(item) ? item.length : 1), 0);
+  
   const [openNav, setOpenNav] = React.useState(false);
   const {user} = useSelector((state)=>state.userSlice);
   React.useEffect(() => {
@@ -190,7 +193,7 @@ const Header =()=> {
               >
                 <path
                   d="M9.97811 7.95252C10.2126 7.38634 10.3333 6.7795 10.3333 6.16667C10.3333 4.92899 9.84167 3.742 8.9665 2.86683C8.09133 1.99167 6.90434 1.5 5.66667 1.5C4.42899 1.5 3.242 1.99167 2.36683 2.86683C1.49167 3.742 1 4.92899 1 6.16667C1 6.7795 1.12071 7.38634 1.35523 7.95252C1.58975 8.51871 1.93349 9.03316 2.36683 9.4665C2.80018 9.89984 3.31462 10.2436 3.88081 10.4781C4.447 10.7126 5.05383 10.8333 5.66667 10.8333C6.2795 10.8333 6.88634 10.7126 7.45252 10.4781C8.01871 10.2436 8.53316 9.89984 8.9665 9.4665C9.39984 9.03316 9.74358 8.51871 9.97811 7.95252Z"
-                  fill="black"
+                  fill="#90A4AE"
                 />
                 <path
                   d="M13 13.5L9 9.5M10.3333 6.16667C10.3333 6.7795 10.2126 7.38634 9.97811 7.95252C9.74358 8.51871 9.39984 9.03316 8.9665 9.4665C8.53316 9.89984 8.01871 10.2436 7.45252 10.4781C6.88634 10.7126 6.2795 10.8333 5.66667 10.8333C5.05383 10.8333 4.447 10.7126 3.88081 10.4781C3.31462 10.2436 2.80018 9.89984 2.36683 9.4665C1.93349 9.03316 1.58975 8.51871 1.35523 7.95252C1.12071 7.38634 1 6.7795 1 6.16667C1 4.92899 1.49167 3.742 2.36683 2.86683C3.242 1.99167 4.42899 1.5 5.66667 1.5C6.90434 1.5 8.09133 1.99167 8.9665 2.86683C9.84167 3.742 10.3333 4.92899 10.3333 6.16667Z"
@@ -198,7 +201,7 @@ const Header =()=> {
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  fill="black"
+                  fill=""
                 />
               </svg>
             </div>
@@ -209,16 +212,16 @@ const Header =()=> {
           </div>
 
               {/* cart */}
-<div className="px-3">
-  <Badge content={5}>
-  <NavLink to='cartpage'>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
-  <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
-</svg>
-  </NavLink>
-  </Badge>
+              {totalItems > 0 ? <Badge content={totalItems} color="orange">
+      <IconButton>
+        <ShoppingCartIcon className="h-4 w-4" />
+      </IconButton>
+    </Badge>: 
+      <IconButton>
+        <ShoppingCartIcon className="h-4 w-4" />
+      </IconButton>
+   }
 
-</div>
 
 {/* login */}
 
