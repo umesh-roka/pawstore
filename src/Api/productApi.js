@@ -54,10 +54,34 @@ export const productApi = createApi({
         }
       }),
       invalidatesTags:['Product']
+    }),
+
+
+
+  removeProduct:builder.mutation({
+    query:(query)=>({
+      url:`/${query.id}`,
+      method:'DELETE',
+      headers:{
+        Authorization:query.token
+      }
+    })
+  }),
+
+    addReview :builder.mutation({
+      query:(query)=>({
+        url:`/review/${query.id}`,
+        method:'PATCH',
+        body:query.body,
+        headers:{
+          Authorization:query.token
+        }
+      }),
+invalidatesTags:['Product']
     })
 
   })
 
 })
 
-export const { useAddProductsMutation,useGetProductQuery,useGetProductByIdQuery,useUpdateProductMutation } = productApi;
+export const { useAddProductsMutation,useGetProductQuery,useGetProductByIdQuery,useUpdateProductMutation,useAddReviewMutation,useRemoveProductMutation } = productApi;

@@ -6,6 +6,7 @@ import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
 import{addCart} from '../../Slice/cartSlice'
 import { useGetProductByIdQuery } from '../../Api/productApi';
+import ProductReview from './ProductReview';
 const ProductDetail = () => {
 const { id } = useParams();
 const {user} = useSelector((state)=>state.userSlice);
@@ -33,6 +34,8 @@ const product = data?.data;
 {user === null ? <AddCart product={product} /> : (user.isAdmin ? '' : (product && <AddCart product={product} />))}
 
 
+</div>
+<div className='ml-[50px]'><ProductReview reviews={product.reviews}/>
 </div>
     </div>
   )

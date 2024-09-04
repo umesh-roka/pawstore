@@ -60,6 +60,17 @@ export const petApi = createApi({
   }),
 
 
+  addReview:builder.mutation({
+  query:(query)=>({
+    url:`review/${query.id}`,
+    method:'PATCH',
+    body:query.body,
+    headers:{
+      Authorization:query.token
+    }
+  })
+    
+  }),
 
 
   // removePet
@@ -82,4 +93,4 @@ export const petApi = createApi({
 
 
 
-export const { useAddPetsMutation, useGetPetsQuery,useGetPetByIdQuery,useRemovePetMutation,useUpdatePetMutation } = petApi;
+export const { useAddPetsMutation, useGetPetsQuery,useGetPetByIdQuery,useRemovePetMutation,useUpdatePetMutation,useAddReviewMutation } = petApi;

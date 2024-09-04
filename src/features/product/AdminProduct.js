@@ -1,28 +1,29 @@
 import { Avatar, Button, Card, Typography } from "@material-tailwind/react";
 import { useNavigate, useParams } from "react-router";
-// import { useSelector } from "react-redux";
 
 import { imageUrl } from "../../constant/constant";
-import { useGetProductQuery } from "../../Api/productApi";
+import { useGetProductQuery, useRemoveProductMutation } from "../../Api/productApi";
+import { useSelector } from "react-redux";
 
 
 const AdminProduct = () => {
-  // const {user} = useSelector((state)=>state.userSlice);
+  const {user}= useSelector((state)=>state.userSlice);
 const nav = useNavigate();
+const[removeproduct] = useRemoveProductMutation();
 
 const {data,isloading,error} = useGetProductQuery();
-// const [removeproduct] = useRemoveproductMutation();
 
   const TABLE_HEAD = ["", "Title", "CreatedAt",
     "Edit", "Delete"];
 
-    // const handleRemove = async (_id,product_image)=>{
-    //   try {
-    //     await removeproduct({id:_id,imagePath:product_image, token:user.token}).unwrap()
-    //   } catch (err) {
+    const handleRemove = async (_id,product_image)=>{
+      try {
+        await removeproduct({id:_id,imagePath:product_image, token:user.token}).unwrap()
+        console.log('deleted ')
+      } catch (err) {
         
-    //   }
-    // }
+      }
+    }
  
 
   return (
@@ -83,7 +84,7 @@ const {data,isloading,error} = useGetProductQuery();
                   </td>
 
                   <td >
-                    <Button  color="red" size="sm" >Delete</Button>
+                    <Button onClick={()=>handleRemove(_id,product_image)}  color="red" size="sm" >Delete</Button>
                   </td>
                 </tr>
               );

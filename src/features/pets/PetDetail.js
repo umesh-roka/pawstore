@@ -6,6 +6,7 @@ import { useGetPetByIdQuery } from '../../Api/petApi';
 import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
 import{addCart} from '../../Slice/cartSlice'
+import PetReview from './PetReview';
 const PetDetail = () => {
 const { id } = useParams();
 const {user} = useSelector((state)=>state.userSlice);
@@ -32,6 +33,8 @@ console.log(pet.pet_name)
 
 {/* {user === null ? '' : (user.isAdmin ? '' : (pet && <AddCart pet={pet} />))} */}
 <AddCart pet={pet} />
+</div>
+<div className='ml-[50px]'><PetReview user={user} id={id} reviews={pet.reviews}/>
 </div>
     </div>
   )
