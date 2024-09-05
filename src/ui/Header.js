@@ -285,7 +285,9 @@ const Header =()=> {
               value={formik.values.query}
               placeholder="Search"
               size='sm'
-             
+              containerProps={{
+                className: "min-w-[100px] h-[40px]",
+              }}
               className=" !border-t-blue-gray-300 pl-9 w-[100px] placeholder:text-blue-gray-300 focus:!border-orange-500"
               labelProps={{
                 className: "before:content-none after:content-none",
