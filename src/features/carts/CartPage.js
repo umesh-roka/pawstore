@@ -55,7 +55,7 @@ const CartPage = () => {
                   <div>
                     {cart.pet_image ? (
                       <div>
-                        <img className='rounded-lg h-[200px] sm:lg[180px] lg:w-[200px]' src={`${imageUrl}${cart.pet_image}`} alt="" />
+                        <img className='rounded-lg h-[200px] sm:w-[180px] lg:w-[200px]' src={`${imageUrl}${cart.pet_image}`} alt="" />
                         <h1 className='font-bold text-xl'>{cart.pet_name}</h1>
                         <h1 className=''>Rs.{cart.pet_price}</h1>
                       </div>
