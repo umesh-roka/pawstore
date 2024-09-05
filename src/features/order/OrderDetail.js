@@ -22,7 +22,7 @@ console.log(data)
   return (
     <>
   <h1 className='uppercase text-center mt-2 underline font-bold text-2xl mb-[50px]'>Order Detail</h1>
-   <div className='grid ml-[60px] lg:grid-cols-2 mb-6'>
+   <div className='grid ml-[60px] sm:grid-cols-1 lg:grid-cols-2 mb-6'>
     
     <div >
       <h1 className='uppercase font-bold text-2xl mt-[10px] mb-[20px]'>List of Items</h1>
@@ -39,8 +39,8 @@ console.log(data)
          })}
          </div>
     </div>
-    <div className='ml-[200px] space-y-6 '>
-      <h1 className='uppercase my-[10px] font-bold text-2xl'>UserDetail</h1>
+    <div className='  lg:ml-[200px] sm:space-y-3 lg:space-y-6 '>
+      <h1 className=' sm:mt-11 sm:mb-3 uppercase lg:my-[10px] font-bold text-2xl'>UserDetail</h1>
       <h1>Email:{detail?.email}</h1>
       <h1>Name:{detail?.name}</h1>
       <h1>District:{address?.district}</h1>

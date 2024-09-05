@@ -33,7 +33,7 @@ const PetReview = ({id,reviews}) => {
     }
   })
   return (
-    <div className='space-y-2 p-7'>
+    <div className='space-y-2 sm:p-4 lg:p-7'>
 
     {!user?.isAdmin && user && <div>
       <h1>Add Review here</h1>

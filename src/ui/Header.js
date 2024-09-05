@@ -231,9 +231,8 @@ const Header =()=> {
           </form>
 
               {/* cart */}
-            <div>
-              <NavLink to='/cartpage'>
-              {totalItems > 0 ? <Badge content={totalItems} color="orange">
+              <NavLink to='/cartpage'>         
+       {totalItems > 0 ? <Badge content={totalItems} color="orange">
       <IconButton>
         <ShoppingCartIcon className="h-4 w-4" />
       </IconButton>
@@ -243,7 +242,7 @@ const Header =()=> {
       </IconButton>
    }
 </NavLink>
-</div>
+
 
 {/* login */}
 
@@ -260,16 +259,19 @@ const Header =()=> {
   return (
     <div className="sticky top-0 z-50">
     <Navbar className=" bg-orange-100 px-4 rounded-none py-2 lg:px-8 lg:py-4">
+   
       <div className="flex lg:mx-[180px] flex-wrap items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           href="/"
-          className="mr-4 cursor-pointer py-1.5 font-bold text-2xl uppercase"
+          className="mr-4 cursor-pointer py-1.5 font-bold sm:lg lg:text-2xl uppercase"
         >
           PawSotre
         </Typography>
-        <div className="hidden lg:block">{navList}</div>
-        <div className="hidden items-center  gap-x-2 lg:flex">
+
+        {/* mobile device search */}
+
+        <div className=" lg:hidden w-[100px] items-center  gap-x-2 ">
        <form onSubmit={formik.handleSubmit}>
           <div className="relative flex w-full gap-2 md:w-max">
          
@@ -281,7 +283,7 @@ const Header =()=> {
               value={formik.values.query}
               placeholder="Search"
               containerProps={{
-                className: "min-w-[288px]",
+                className: "min-w-[150px] h-[40px]",
               }}
               className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
               labelProps={{
@@ -290,7 +292,7 @@ const Header =()=> {
             />
             <div className="!absolute left-3 top-[13px]">
               <svg
-                width="13"
+                width="14"
                 height="14"
                 
                 viewBox="0 0 14 15"
@@ -312,13 +314,18 @@ const Header =()=> {
               </svg>
             </div>
           </div>
-          <Button type="submit" size="md" className="rounded-lg ">
+          <Button type="submit" size="sm" className="rounded-lg ">
             Search
           </Button>
           
           </div>
           </form>
+
+
         </div>
+     
+        <div className="hidden lg:block">{navList}</div>
+       
         <IconButton
           variant="text"
           className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -357,12 +364,22 @@ const Header =()=> {
           )}
         </IconButton>
       </div>
-      {/* search */}
- 
-
       <Collapse open={openNav}>
         <div className="container mx-auto">
           {navList}
+      {/* cart */}
+       <NavLink to='/cartpage'>         
+       {totalItems > 0 ? <Badge content={totalItems} color="orange">
+      <IconButton>
+        <ShoppingCartIcon className="h-4 w-4" />
+      </IconButton>
+    </Badge>: 
+      <IconButton>
+        <ShoppingCartIcon className="h-4 w-4" />
+      </IconButton>
+   }
+</NavLink>
+
 
 {/* login */}
           {user ? (<ProfileMenu user = {user}/>):(<NavLink to='login' className=''>
@@ -374,7 +391,6 @@ const Header =()=> {
           </div>
         </div>
       </Collapse>
-
     </Navbar>
     </div>
   );

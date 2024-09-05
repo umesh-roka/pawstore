@@ -15,7 +15,7 @@ const UserOrder = () => {
   console.log(data);
 
   return (
-    <div className=' sm:w-[400px] col-span-2'>
+    <div className=' lg:w-[400px] col-span-2'>
     <Card className="h-full w-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
