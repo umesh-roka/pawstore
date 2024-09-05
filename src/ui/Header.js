@@ -286,9 +286,9 @@ const Header =()=> {
               placeholder="Search"
               size='sm'
               containerProps={{
-                className: "w-[150px] h-[40px]",
+                className: "min-w-[100px] h-[40px]",
               }}
-              className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
+              className=" !border-t-blue-gray-300 pl-9 w-[100px] placeholder:text-blue-gray-300 focus:!border-orange-500"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
