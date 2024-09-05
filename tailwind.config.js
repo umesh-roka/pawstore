@@ -8,7 +8,9 @@ module.exports = withMT({
   theme: {
 
     extend: {
+      boxShadow: {
 
+      },
       keyframes: {
        
         },

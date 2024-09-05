@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux'
 
 const PetReview = ({id,reviews}) => {
   const{user} = useSelector((state)=>state.userSlice);
-  console.log(user.username);
-  const username = user.username;
+  console.log(reviews);
+
   const [addReview,{isLoading}] = useAddReviewMutation();
   const{handleSubmit,handleChange,setFieldValue} = useFormik({
     initialValues:{
@@ -50,9 +50,9 @@ const PetReview = ({id,reviews}) => {
     }
 
     <div className='mt-5'>
-      {reviews.map(({ _id, comment, rating,  }) => {
+      {reviews.map(({ _id, comment, rating, user }) => {
         return <div key={_id} className=' space-y-1'>
-          <h1 className='font-bold text-xl'>{username}</h1>
+          <h1 className='font-bold text-xl'>{user.username}</h1>
           <Rating value={rating} readonly />
           <p>{comment}</p>
         </div>

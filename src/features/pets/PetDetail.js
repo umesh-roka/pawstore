@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Card, Typography } from '@material-tailwind/react';
+import { Button, Card, Rating, Typography } from '@material-tailwind/react';
 import { useGetPetByIdQuery } from '../../Api/petApi';
 import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
@@ -11,11 +11,11 @@ const PetDetail = () => {
 const { id } = useParams();
 const {user} = useSelector((state)=>state.userSlice);
 const {data,isLoading} = useGetPetByIdQuery(id);
+console.log(data);
 if(isLoading){
   return <div>loading...</div>
 }
 const pet = data?.data;
-console.log(pet.pet_name)
   return (
     <div className='my-4'>
   <h1 className='font-bold text-4xl ml-16 uppercasev'>Pet Detail</h1>
@@ -31,11 +31,12 @@ console.log(pet.pet_name)
 
 </div>
 
-{/* {user === null ? '' : (user.isAdmin ? '' : (pet && <AddCart pet={pet} />))} */}
-<AddCart pet={pet} />
+{user === null ? <AddCart pet={pet} /> : (user.isAdmin ? '' : (pet && <AddCart pet={pet} />))}
+
 </div>
+
 <div className='ml-[50px]'><PetReview user={user} id={id} reviews={pet.reviews}/>
-</div>
+  </div>
     </div>
   )
 }

@@ -47,12 +47,14 @@ const Breed = () => {
       </div>)}
       
 
-      <div className="mt-7 sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
+      <div className="mt-7  sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
         {isLoading ? (
           <p>Loading...</p>
         ) : (
           filteredPets.map(({ _id, pet_name, pet_detail, pet_category, pet_image }) => (
-            <Card key={_id} className="sm:w-[190px] lg:w-[250px] lg:h-[350px] bg-orange-100 shadow-lg">
+             <Card key={_id} className="sm:w-[190px] 
+            shadow-2xl shadow-blue-gray-500/50
+             hover:shadow-orange-200 lg:w-[250px] lg:h-[350px] bg-orange-100 ">
               <CardHeader floated={false} color="blue-gray">
                 <img
                   className="lg:h-[150px] lg:w-full"

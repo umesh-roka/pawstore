@@ -26,7 +26,8 @@ const nav = useNavigate();
     <div className="mt-7 sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
 
       {data?.data.map(({ _id, product_name, product_detail,product_category, product_image }) => {
-        return  <Card className=" sm:w-[190px] lg:w-[250px] lg:h-[350px]  bg-gray-100 shadow-lg">
+        return  <Card className=" shadow-blue-gray-500/50 
+    hover:shadow-gray-700 sm:w-[190px] lg:w-[250px] lg:h-[350px]  bg-gray-100 shadow-2xl">
         <CardHeader floated={false} color="blue-gray">
           <img
           className="lg:h-[150px] lg:w-full"

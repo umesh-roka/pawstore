@@ -8,8 +8,18 @@ export const petApi = createApi({
     baseUrl:petUrl,
   }),
 
-  // adding pet 
+  
   endpoints:(builder) =>({
+
+getTopPet:builder.query({
+query:(query)=>({
+  url:'/top-pet',
+  method:'GET',
+}),
+providesTags:['Pet']
+}),
+
+// adding pet 
   addPets:builder.mutation({
     query:(query)=>({
    url:'/',
@@ -68,8 +78,8 @@ export const petApi = createApi({
     headers:{
       Authorization:query.token
     }
-  })
-    
+  }),
+  invalidatesTags:['pet']
   }),
 
 
@@ -86,11 +96,24 @@ export const petApi = createApi({
       }
     }),
     invalidatesTags:['Pet']
-  })
+  }),
+
+  
+searchPet:builder.query({
+  query:(query)=>({
+    url:'/',
+    method:'GET',
+    params:{
+      search:query
+    }
+  }),
+  providesTags:['Pet']
+
+})
 
   })
 })
 
 
 
-export const { useAddPetsMutation, useGetPetsQuery,useGetPetByIdQuery,useRemovePetMutation,useUpdatePetMutation,useAddReviewMutation } = petApi;
+export const {useGetTopPetQuery, useAddPetsMutation, useGetPetsQuery,useGetPetByIdQuery,useRemovePetMutation,useUpdatePetMutation,useAddReviewMutation,useSearchPetQuery } = petApi;

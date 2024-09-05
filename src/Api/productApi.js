@@ -42,7 +42,6 @@ export const productApi = createApi({
       providesTags:['Product']
     }),
 
-
 // updateProduct
     updateProduct: builder.mutation({
       query:(query)=>({
@@ -55,7 +54,6 @@ export const productApi = createApi({
       }),
       invalidatesTags:['Product']
     }),
-
 
 
   removeProduct:builder.mutation({
@@ -78,10 +76,21 @@ export const productApi = createApi({
         }
       }),
 invalidatesTags:['Product']
+    }),
+
+    searchProduct:builder.query({
+      query:(query)=>({
+        url:'/',
+        method:'GET',
+        params:{
+         search:query
+        }
+      }),
+      providesTags:['Product']
     })
 
   })
 
 })
 
-export const { useAddProductsMutation,useGetProductQuery,useGetProductByIdQuery,useUpdateProductMutation,useAddReviewMutation,useRemoveProductMutation } = productApi;
+export const { useAddProductsMutation,useGetProductQuery,useGetProductByIdQuery,useUpdateProductMutation,useAddReviewMutation,useRemoveProductMutation, useSearchProductQuery } = productApi;

@@ -7,6 +7,7 @@ export const orderApi = createApi({
   baseQuery:fetchBaseQuery({
     baseUrl:orderUrl
   }),
+  
   endpoints:(builder)=>({
    placeOrder:builder.mutation({
     query:(query)=>({

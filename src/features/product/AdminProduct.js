@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { imageUrl } from "../../constant/constant";
 import { useGetProductQuery, useRemoveProductMutation } from "../../Api/productApi";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 
 const AdminProduct = () => {
@@ -19,9 +20,10 @@ const {data,isloading,error} = useGetProductQuery();
     const handleRemove = async (_id,product_image)=>{
       try {
         await removeproduct({id:_id,imagePath:product_image, token:user.token}).unwrap()
-        console.log('deleted ')
+        toast.success('Deleted Successfully');
       } catch (err) {
-        
+        toast.success('getting somethig error');
+
       }
     }
  
@@ -33,7 +35,7 @@ const {data,isloading,error} = useGetProductQuery();
         <Button onClick={()=>nav('/addproduct')} className="py-2 px-4" color="orange" size="lg">Add products</Button>
       </div>
 
-      {<Card className="max-w-3xl">
+      {<Card className="max-w-3xl ">
         <table className=" table-auto text-left">
           <thead>
             <tr>

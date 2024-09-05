@@ -20,6 +20,7 @@ import Ordered from './features/order/Ordered'
 import UserOrder from './features/order/UserOrder'
 import OrderDetail from './features/order/OrderDetail'
 import UserProfile from './features/auth/UserProfile'
+import SearchPage from './features/components/SearchPage'
 
 
 
@@ -53,7 +54,11 @@ children:[
 {path:'Accessories',element:<Accessories/>},
 {path:'order',element:<Ordered/>},
 {path:'userorder',element:<UserOrder/>},
-{path:'order/:id',element:<OrderDetail/>}
+{path:'order/:id',element:<OrderDetail/>},
+
+
+{path:'search-page/:query',element:<SearchPage/>}
+
 
 
 

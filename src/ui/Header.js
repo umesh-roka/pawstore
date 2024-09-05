@@ -17,6 +17,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ChevronDownIcon, Cog6ToothIcon, PowerIcon, ShoppingCartIcon, UserCircleIcon } from "@heroicons/react/16/solid";
 import { userLogout } from "../Slice/userSlice";
+import { useFormik } from "formik";
  
 // userProfile
 
@@ -68,7 +69,7 @@ function ProfileMenu({ user }) {
         >
           <Avatar
             variant="circular"
-            size="md"
+            size="sm"
             alt="User Avatar"
             className="border border-gray-900 p-0.5"
             src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -114,8 +115,19 @@ const Header =()=> {
   const {carts} = useSelector((state)=>state.cartSlice);
   const totalItems = carts.reduce((sum, item) => sum + (Array.isArray(item) ? item.length : 1), 0);
   
+  const nav = useNavigate();
   const [openNav, setOpenNav] = React.useState(false);
   const {user} = useSelector((state)=>state.userSlice);
+  const formik = useFormik({
+    initialValues:{
+      query:'',
+    },
+    onSubmit: (val,resetForm)=>{
+     nav(`/search-page/${val.query}`);
+    }
+  })
+
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -169,10 +181,15 @@ const Header =()=> {
 
        {/* search */}
        <div className="hidden items-center  gap-x-2 lg:flex">
+       <form onSubmit={formik.handleSubmit}>
           <div className="relative flex w-full gap-2 md:w-max">
+         
           <div className="">
             <Input
               type="search"
+              name="query"
+              onChange={formik.handleChange}
+              value={formik.values.query}
               placeholder="Search"
               containerProps={{
                 className: "min-w-[288px]",
@@ -206,12 +223,16 @@ const Header =()=> {
               </svg>
             </div>
           </div>
-          <Button size="md" className="rounded-lg ">
+          <Button type="submit" size="md" className="rounded-lg ">
             Search
           </Button>
+          
           </div>
+          </form>
 
               {/* cart */}
+            <div>
+              <NavLink to='/cartpage'>
               {totalItems > 0 ? <Badge content={totalItems} color="orange">
       <IconButton>
         <ShoppingCartIcon className="h-4 w-4" />
@@ -221,7 +242,8 @@ const Header =()=> {
         <ShoppingCartIcon className="h-4 w-4" />
       </IconButton>
    }
-
+</NavLink>
+</div>
 
 {/* login */}
 

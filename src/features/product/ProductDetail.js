@@ -33,11 +33,10 @@ const product = data?.data;
 
 {user === null ? <AddCart product={product} /> : (user.isAdmin ? '' : (product && <AddCart product={product} />))}
 
-
 </div>
 <div className='ml-[50px]'><ProductReview reviews={product.reviews}/>
-</div>
-    </div>
+  </div> 
+   </div>
   )
 }
 

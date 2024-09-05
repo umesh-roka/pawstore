@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { useGetPetsQuery, useRemovePetMutation } from "../../Api/petApi";
 import { imageUrl } from "../../constant/constant";
+import { toast } from "react-toastify";
 
 
 const AdminPet = () => {
@@ -18,8 +19,11 @@ const [removePet] = useRemovePetMutation();
     const handleRemove = async (_id,pet_image)=>{
       try {
         await removePet({id:_id,imagePath:pet_image, token:user.token}).unwrap()
+        toast.success('Deleted Successfully');
+
       } catch (err) {
-        
+        toast.success('getting somethig error');
+
       }
     }
  
