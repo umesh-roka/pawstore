@@ -259,21 +259,21 @@ const Header =()=> {
   );
  
   return (
-    <div className="sticky top-0 z-50">
+    <div className="sticky  top-0 z-50">
     <Navbar className=" bg-orange-100 px-4 rounded-none py-2 lg:px-8 lg:py-4">
    
       <div className="flex lg:mx-[180px] flex-wrap items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           href="/"
-          className="mr-4 cursor-pointer py-1.5 font-bold sm:lg lg:text-2xl uppercase"
+          className="mr-4 cursor-pointer py-1.5 font-bold text-2xl uppercase"
         >
           PawSotre
         </Typography>
 
         {/* mobile device search */}
 
-        <div className=" lg:hidden w-[100px] items-center  gap-x-2 ">
+        <div className=" lg:hidden ">
        <form onSubmit={formik.handleSubmit}>
           <div className="relative flex w-full gap-2 md:w-max">
          
@@ -284,11 +284,10 @@ const Header =()=> {
               onChange={formik.handleChange}
               value={formik.values.query}
               placeholder="Search"
-              size='sm'
               containerProps={{
-                className: "max-w-[100px] h-[40px]",
+                className: "min-w-[150px] h-[40px]",
               }}
-              className=" !border-t-blue-gray-300 pl-9 w-[100px] placeholder:text-blue-gray-300 focus:!border-orange-500"
+              className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
