@@ -35,7 +35,7 @@ const pet = data?.data;
 
 </div>
 
-<div className='ml-[50px]'><PetReview user={user} id={id} reviews={pet.reviews}/>
+<div className='lg:ml-[50px]'><PetReview user={user} id={id} reviews={pet.reviews}/>
   </div>
     </div>
   )
