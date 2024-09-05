@@ -123,7 +123,10 @@ const Header =()=> {
       query:'',
     },
     onSubmit: (val,resetForm)=>{
-     nav(`/search-page/${val.query}`);
+      if(val.query){
+        nav(`/search-page/${val.query}`);
+      }
+     nav('/')
     }
   })
 
@@ -314,9 +317,9 @@ const Header =()=> {
               </svg>
             </div>
           </div>
-          <Button type="submit" size="sm" className="rounded-lg ">
+          <button type="submit"  className="rounded-lg bg-black text-orange-900  px-3 uppercase w-[90px]">
             Search
-          </Button>
+          </button>
           
           </div>
           </form>
