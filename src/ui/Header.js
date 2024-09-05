@@ -286,9 +286,9 @@ const Header =()=> {
               value={formik.values.query}
               placeholder="Search"
               containerProps={{
-                className: "w-[100px] h-[30px]",
+                className: "",
               }}
-              className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
+              className=" !border-t-blue-gray-300 w-[100px] h-[30px] pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
@@ -317,7 +317,7 @@ const Header =()=> {
               </svg>
             </div>
           </div>
-          <button type="submit"  className="rounded-lg bg-black text-white  px-3 uppercase h-[30px] w-[80px]">
+          <button type="submit"  className="rounded-lg bg-black text-white  px-3 uppercase h-[30px] w-[0px]">
             Search
           </button>
           
