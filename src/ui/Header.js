@@ -123,10 +123,9 @@ const Header =()=> {
       query:'',
     },
     onSubmit: (val,resetForm)=>{
-      if(val.query){
+    
         nav(`/search-page/${val.query}`);
-      }
-     nav('/')
+      
     }
   })
 
@@ -285,15 +284,16 @@ const Header =()=> {
               onChange={formik.handleChange}
               value={formik.values.query}
               placeholder="Search"
+              size='sm'
               containerProps={{
-                className: "",
+                className: "min-w-[150px] h-[40px]",
               }}
-              className=" !border-t-blue-gray-300 w-[100px] h-[30px] pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
+              className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
             />
-            <div className="!absolute left-3 top-[10px]">
+            <div className="!absolute left-3 top-[13px]">
               <svg
                 width="14"
                 height="14"
@@ -317,7 +317,7 @@ const Header =()=> {
               </svg>
             </div>
           </div>
-          <button type="submit"  className="rounded-lg bg-black text-white  px-3 uppercase h-[30px] w-[0px]">
+          <button type="submit"  className="rounded-lg bg-black text-white text-sm px-1 uppercase w-[80px]">
             Search
           </button>
           
