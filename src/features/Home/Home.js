@@ -19,7 +19,7 @@ const Home = () => {
 <div className='bg-gray-100'>
  <Breed/>
  <NavLink to='/pets'>
-  <Button className='uppercase mx-[700px] my-[20px]'>See more</Button>
+  <Button className='uppercase sm:ml-[150px] lg:mx-[700px] my-[20px]'>See more</Button>
   </NavLink> </div>
  <figure className="relative h-96 my-7 ">
        <img
@@ -38,7 +38,7 @@ const Home = () => {
  <div className='bg-orange-200'>
   <Accessories/>
   <NavLink to='/accessories'>
-  <Button className='uppercase mx-[700px] my-[20px]'>See more</Button>
+  <Button className='uppercase sm:ml-[150px] lg:mx-[700px] my-[20px]'>See more</Button>
   </NavLink>
  </div>
  <figure className="relative h-96 my-7 ">
