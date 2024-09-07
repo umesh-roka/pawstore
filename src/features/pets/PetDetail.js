@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Card, Rating, Typography } from '@material-tailwind/react';
+import { Button, Card,  Typography } from '@material-tailwind/react';
 import { useGetPetByIdQuery } from '../../Api/petApi';
 import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
@@ -18,16 +18,20 @@ if(isLoading){
 const pet = data?.data;
   return (
     <div className='my-4'>
-  <h1 className='font-bold text-4xl ml-16 uppercasev'>Pet Detail</h1>
+  <h1 className='font-bold text-4xl ml-16 uppercase bg-orange-300 rounded-lg px-2 py-1 w-fit'>Pet Detail</h1>
  <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
 
 <div className="image">
-  <img className='w-full rounded-xl' src={`${imageUrl}${pet.pet_image}`} alt="" />
+  <img className='w-full lg:mb-[140px] rounded-xl' src={`${imageUrl}${pet.pet_image}`} alt="" />
 </div>
-<div className="info space-y-3">
-  <h1 className='font-bold text-3xl'>{pet.pet_name}</h1>
-  <p className='text-xl' >{pet.pet_detail} </p>
-  <p className='text-xl' >Rs.{pet.pet_price}</p>
+<div className="info  space-y-1">
+<h1 className='font-bold text-3xl  '>{pet.pet_name}</h1>
+<p className='text-xl font-bold' >Price: Rs.{pet.pet_price}</p>
+<p className='text-xl font-bold' >Breed: {pet.pet_breed}</p>
+<div>
+<p className='text-xl font-bold' >Detail </p>
+<p className='text-xl text-justify' >{pet.pet_detail} </p>
+</div>
 
 </div>
 
@@ -63,7 +67,7 @@ const handleSubmit =()=>{
   nav('/cartpage');
 }
   return (
-    <Card className="h-full w-full overflow-scroll">
+    <Card className="h-[300px] lg:mb-[150px] w-full overflow-scroll">
     <table>
     <thead>
           <tr>

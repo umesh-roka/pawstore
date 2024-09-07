@@ -15,19 +15,27 @@ if(isLoading){
   return <div>loading...</div>
 }
 const product = data?.data;
+console.log(product)
 
   return (
     <div className='my-4'>
-  <h1 className='font-bold text-4xl ml-16 uppercasev'>Product Detail</h1>
+  <h1 className='font-bold text-4xl sm:ml-2 lg:ml-16 uppercase bg-orange-300 rounded-lg  w-fit px-2 py-1'>Product Detail</h1>
  <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
 
 <div className="image">
-  <img className='w-full rounded-xl' src={`${imageUrl}${product.product_image}`} alt="" />
+  <img className='w-full h-[400px] rounded-xl' src={`${imageUrl}${product.product_image}`} alt="" />
+
 </div>
-<div className="info space-y-3">
-  <h1 className='font-bold text-3xl'>{product.product_name}</h1>
-  <p className='text-xl' >{product.product_detail} </p>
-  <p className='text-xl' >Rs.{product.product_price}</p>
+<div className="info p-0  space-y-3 ">
+<h1 className='font-bold text-3xl my-2 '>{product.product_name}</h1>
+
+<p className='text-xl font-bold ' >Price: Rs.{product.product_price}</p>
+<p className='text-xl font-bold' >Catogery: {product.category}
+</p>
+<div>
+<p className='text-xl font-bold' >Detail </p>
+<p className='text-xl text-justify' >{product.product_detail} </p>
+</div>
 
 </div>
 
@@ -62,7 +70,7 @@ const handleSubmit =()=>{
   nav('/cartpage');
 }
   return (
-    <Card className="h-full w-full overflow-scroll">
+    <Card className="h-[200px] lg:mb-[150px] w-full overflow-scroll">
     <table>
     <thead>
           <tr>

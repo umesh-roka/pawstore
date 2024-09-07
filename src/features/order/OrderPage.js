@@ -9,12 +9,14 @@ import {
 } from "@material-tailwind/react";
 import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePlaceOrderMutation } from '../../Api/orderApi';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
+import { clearAll } from '../../Slice/cartSlice';
 
 const OrderPage = () => {
+  const dispatch= useDispatch();
   const { carts } = useSelector((state) => state.cartSlice);
   const { user } = useSelector((state) => state.userSlice);
 
@@ -58,6 +60,7 @@ const nav = useNavigate();
 
         await placeOrder({body:order,token:user.token}).unwrap(); // Trigger the mutation and unwrap the response
           toast.success('ordered successfully')
+          dispatch(clearAll());
           nav('/userorder')
       } catch (error) {
         toast.error('something gets wrong');

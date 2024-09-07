@@ -5,6 +5,7 @@ import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
 import { clearAll, removeFromCart, updateCartQuantity } from '../../Slice/cartSlice'; // Assuming you have an action to update the quantity
 import { useNavigate } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 const CartPage = () => {
   const nav = useNavigate();
@@ -38,7 +39,24 @@ const CartPage = () => {
   return (
     <div>
       {carts.length === 0 ? (
-        <h1>Cart is empty</h1>
+        // cart empty 
+        <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+        <div className="text-center">
+          
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Cart is empty</h1>
+      
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <NavLink to='/'
+              className="rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Add to cart
+            </NavLink>
+            <NavLink className="text-sm font-semibold text-gray-900">
+              Contact support <span aria-hidden="true">&rarr;</span>
+            </NavLink>
+          </div>
+        </div>
+      </main>
       ) : (
         <div>
           <div className='ml-[20px] py-9'>
@@ -94,3 +112,5 @@ const CartPage = () => {
 };
 
 export default CartPage;
+
+

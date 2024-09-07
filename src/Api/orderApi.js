@@ -27,8 +27,11 @@ export const orderApi = createApi({
    getAllorder:builder.query({
     query:(query)=>(
       {
-        url:'/',
-        method:'GET'
+        url:query?.isAdmin ?  '/':`/user/${query.id}`,
+        method:'GET',
+        headers:{
+          Authorization:query.token
+        }
       }),
       providesTags:['Order']
    }),

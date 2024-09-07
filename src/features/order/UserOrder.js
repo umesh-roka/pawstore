@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useGetOrderByUserQuery } from '../../Api/orderApi';
+import { useGetAllorderQuery,} from '../../Api/orderApi';
 import { Button, Card, Typography } from "@material-tailwind/react";
 import { useNavigate } from 'react-router';
 
@@ -10,12 +10,13 @@ const TABLE_HEAD = ["ProductId", "Total", "CreatedAt", ''];
 const UserOrder = () => {
   const nav = useNavigate();
   const {user}= useSelector((state)=>state.userSlice);
-  const{data} = useGetOrderByUserQuery(user);
+  const{data} = useGetAllorderQuery(user);
   console.log(user);
-  console.log(data);
+  console.log(data?.data);
 
   return (
-    <div className=' lg:w-[400px] col-span-2'>
+  
+    <div className=' sm:w-[400px] col-span-2'>
     <Card className="h-full w-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">
         <thead>

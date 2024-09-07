@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChevronDownIcon, Cog6ToothIcon, PowerIcon, ShoppingCartIcon, UserCircleIcon } from "@heroicons/react/16/solid";
 import { userLogout } from "../Slice/userSlice";
 import { useFormik } from "formik";
+import { clearAll } from "../Slice/cartSlice";
  
 // userProfile
 
@@ -49,6 +50,7 @@ function ProfileMenu({ user }) {
         break;
       case 'logout':
         dispatch(userLogout());
+        dispatch(clearAll());
         nav('/');
         break;
       default:
