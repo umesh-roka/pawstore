@@ -26,16 +26,15 @@ const [removePet] = useRemovePetMutation();
 
       }
     }
- 
 
   return (
-    <div className="p-5">
+    <div className=" lg:ml-[100px]  p-5">
       <div className="mb-4 flex justify-between">
         <h1 className="text-2xl font-semibold">Welcome To Pow Store</h1>
         <Button onClick={()=>nav('/addpet')} className="py-2 px-4" color="orange" size="lg">Add Pets</Button>
       </div>
 
-      {<Card className="max-w-3xl">
+      {<Card className="sm:max-w-2xl lg:max-w-4xl ">
         <table className=" table-auto text-left">
           <thead>
             <tr>
@@ -70,6 +69,7 @@ const [removePet] = useRemovePetMutation();
                       className="font-normal"
                     >
                       {pet_name}
+
                     </Typography>
                   </td>
                   <td >

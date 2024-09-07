@@ -196,7 +196,7 @@ const Header =()=> {
               containerProps={{
                 className: "min-w-[288px]",
               }}
-              className=" rounded-[10px] !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
+              className=" rounded-[15px] !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-orange-500"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}

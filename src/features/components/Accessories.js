@@ -21,7 +21,7 @@ const nav = useNavigate();
   return (
   
 
-    <div className='bg-orange-200 pb-8 '>
+    <div className=' pb-8  '>
       <h1 className='font-bold text-4xl uppercase text-center pt-6 '>Accessories</h1>
     <div className="mt-7 sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
 

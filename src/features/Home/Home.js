@@ -2,7 +2,8 @@ import React from 'react'
 import Caro from './Caro'
 import Breed from '../components/Breed'
 import Accessories from '../components/Accessories'
-import { Typography } from '@material-tailwind/react'
+import { Button, Typography } from '@material-tailwind/react'
+import { NavLink } from 'react-router-dom'
 
 const Home = () => {
   return (
@@ -11,13 +12,15 @@ const Home = () => {
 
   <div class="... lg:mt-20 lg:mb-20 sm:px-[110px] "><Caro/> </div>
   <div class="... sm:p-3 text-justify"><h1 className='font-bold sm:text-2xl lg:text-3xl mb-4'>EveryBody Needs A Friend In Life</h1>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, est rem. Distinctio alias dolorem soluta molestias dolores provident blanditiis recusandae, asperiores, dicta eius neque similique. Consequuntur dignissimos odio facilis tempora magnam, placeat ipsa deserunt? Laudantium nulla, cupiditate nam saepe est beatae illum mollitia labore earum vel? Nulla quibusdam blanditiis in possimus voluptatum eaque cum, nobis veniam.</p>
+  <p className=''>Welcome to PawStore, your trusted source for finding the perfect canine or feline companion. Specializing exclusively in dogs and cats, we offer a variety of healthy, well-cared-for breeds along with a wide range of pet accessories, including premium food, grooming supplies, toys, and stylish apparel. Our mission is to help you build a strong bond with your new pet by providing expert advice and high-quality products. Whether you’re looking for a playful pup, a cuddly kitten, or the best accessories to pamper them, PawStore is here to support you every step of the way.</p>
   <button className=' px-2 py-1 bg-orange-500 rounded-lg mt-3'>Buy Me </button>
   </div>
 </div>
-<div>
+<div className='bg-gray-100'>
  <Breed/>
- </div>
+ <NavLink to='/pets'>
+  <Button className='uppercase mx-[700px] my-[20px]'>See more</Button>
+  </NavLink> </div>
  <figure className="relative h-96 my-7 ">
        <img
          className="h-full   object-cover w-full object-center"
@@ -32,8 +35,11 @@ const Home = () => {
            </div>
        </figcaption>
      </figure>
- <div>
+ <div className='bg-orange-200'>
   <Accessories/>
+  <NavLink to='/accessories'>
+  <Button className='uppercase mx-[700px] my-[20px]'>See more</Button>
+  </NavLink>
  </div>
  <figure className="relative h-96 my-7 ">
        <img

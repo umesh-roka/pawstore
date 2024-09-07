@@ -21,6 +21,7 @@ import UserOrder from './features/order/UserOrder'
 import OrderDetail from './features/order/OrderDetail'
 import UserProfile from './features/auth/UserProfile'
 import SearchPage from './features/components/SearchPage'
+import NotFoundPage from './ui/NotFoundPage'
 
 
 
@@ -57,7 +58,10 @@ children:[
 {path:'order/:id',element:<OrderDetail/>},
 
 
-{path:'search-page/:query',element:<SearchPage/>}
+{path:'search-page/:query',element:<SearchPage/>},
+
+
+{path:'*',element:<NotFoundPage/>}
 
 
 

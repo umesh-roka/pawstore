@@ -63,7 +63,8 @@ export const productApi = createApi({
       headers:{
         Authorization:query.token
       }
-    })
+    }),
+    invalidatesTags:['Product']
   }),
 
     addReview :builder.mutation({
