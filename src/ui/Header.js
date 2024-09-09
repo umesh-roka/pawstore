@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Navbar,
   Typography,
@@ -114,6 +114,9 @@ function ProfileMenu({ user }) {
 
 
 const Header =()=> {
+  useEffect(()=>{
+    return window.scrollTo(0,0)
+  })
   const {carts} = useSelector((state)=>state.cartSlice);
   const totalItems = carts.reduce((sum, item) => sum + (Array.isArray(item) ? item.length : 1), 0);
   

@@ -14,12 +14,27 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useAddPetsMutation } from "../../Api/petApi";
 
+import * as yup from 'yup';
 const AddPetForm = () => {
   const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
   const [addPet, { isLoading }] = useAddPetsMutation();
 
-  const { handleSubmit, handleChange, setFieldValue, values } = useFormik({
+  const petSchema = yup.object({
+  
+    pet_name:yup.string().required('Pet name is required'),
+    pet_detail:yup.string().required('Pet detail is required'),
+    pet_price:yup.number().required('Pet price is required'),
+    pet_breed:yup.string().required('Pet breed is required'),
+    pet_category:yup.string().required('Pet category is required'),
+    pet_gender:yup.string().required('Pet gender is required'),
+    countInStock:yup.number().required('Count in stock is required'),
+    pet_image:yup.mixed().required('provide valid image with ext.. jpg , png , jpeg').test('fileType','invalid image',(e)=>{
+      return['image/jpg','image/png','image/jpeg'].includes(e.type)
+    })
+  });
+
+  const { handleSubmit,errors,touched, handleChange, setFieldValue, values } = useFormik({
     initialValues: {
       pet_name: '',
       pet_detail: '',
@@ -51,6 +66,7 @@ const AddPetForm = () => {
 
       }
     },
+    validationSchema:petSchema
   });
 
   return (
@@ -69,6 +85,7 @@ const AddPetForm = () => {
             name="pet_name"
             onChange={handleChange}
           />
+        {errors.pet_name && touched.pet_name && <h1 className="text-red-500">{errors.pet_name}</h1>}
 
           <Input
             size="lg"
@@ -78,6 +95,7 @@ const AddPetForm = () => {
             name="pet_breed"
             onChange={handleChange}
           />
+          {errors.pet_breed && touched.pet_breed && <h1 className="text-red-500">{errors.pet_breed}</h1>}
 
           <Input
             size="lg"
@@ -88,6 +106,7 @@ const AddPetForm = () => {
             onChange={handleChange}
             
           />
+      {errors.pet_price && touched.pet_price && <h1 className="text-red-500">{errors.pet_price}</h1>}
 
           <div>
             <h1>Select the Gender</h1>
@@ -100,7 +119,9 @@ const AddPetForm = () => {
                 value={gen.value}
                 color={gen.color}
               />
+              
             ))}
+            {errors.pet_gender && touched.pet_gender && <h1 className="text-red-500">{errors.pet_gender}</h1>}
           </div>
 
           <Select onChange={(e) => setFieldValue('pet_category', e)} label="Select Category"   
@@ -117,7 +138,7 @@ const AddPetForm = () => {
             name="countInStock"
             onChange={handleChange}
           />
-
+    {errors.countInStock && touched.countInStock && <h1 className="text-red-500">{errors.countInStock}</h1>}
           <Textarea
             size="lg"
             placeholder="Pet Detail"
@@ -126,6 +147,7 @@ const AddPetForm = () => {
             name="pet_detail"
             onChange={handleChange}
           />
+          {errors.pet_detail && touched.pet_detail && <h1 className="text-red-500">{errors.pet_detail}</h1>}
 
           <div className="space-y-2">
             <h1>Select An Image</h1>
@@ -142,6 +164,7 @@ const AddPetForm = () => {
                 }
               }}
             />
+             {errors.pet_image && touched.pet_image && <h1 className='text-red-500'>{errors.pet_image}</h1>}
             {values.imageReview && <img src={values.imageReview} alt="Preview" />}
           </div>
         </div>

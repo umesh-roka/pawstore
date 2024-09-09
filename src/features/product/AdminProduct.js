@@ -1,18 +1,27 @@
-import { Avatar, Button, Card, Typography } from "@material-tailwind/react";
+import { Avatar, Button, Card, CardFooter, Typography } from "@material-tailwind/react";
 import { useNavigate, useParams } from "react-router";
 
 import { imageUrl } from "../../constant/constant";
 import { useGetProductQuery, useRemoveProductMutation } from "../../Api/productApi";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import ProductPagination from "./ProductPagination";
 
 
 const AdminProduct = () => {
+  const [active, setActive] = useState(1)
+  const {data,isloading,error} = useGetProductQuery({page:active});
+
+  useEffect(()=>{
+    return window.scrollTo(0,0);
+  },[active])
   const {user}= useSelector((state)=>state.userSlice);
 const nav = useNavigate();
 const[removeproduct] = useRemoveProductMutation();
 
-const {data,isloading,error} = useGetProductQuery();
+
+
 
   const TABLE_HEAD = ["", "Title", "CreatedAt",
     "Edit", "Delete"];
@@ -93,6 +102,9 @@ const {data,isloading,error} = useGetProductQuery();
             })}
           </tbody>
         </table>
+        <CardFooter className="lg:ml-[200px] mt-10 p-4">
+          <ProductPagination active={active} setActive={setActive} />
+        </CardFooter>
       </Card>}
 
     </div>

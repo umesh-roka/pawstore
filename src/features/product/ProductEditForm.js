@@ -12,13 +12,27 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { imageUrl } from "../../constant/constant";
+import * as yup from 'yup'
 
 const ProductEditForm = ({data}) => {
 
   const nav = useNavigate();
  const {user} = useSelector((state)=>state.userSlice);
 const[updateProduct,{isLoading}] = useUpdateProductMutation();
- const {handleChange,handleSubmit,values,setFieldValue} = useFormik({
+
+const productSchema = yup.object({
+  product_name: yup.string().required('Product name is required'),
+  product_price: yup.number().required('Product price is required'),
+  product_detail: yup.string().required('Product detail is required'),
+  countInStock: yup.number().required('Count in stock is required'),
+  category: yup.string().required('Category is required'),
+  // product_image : yup.string().required('provide image with valid ext...  jpg , jpeg , png ').test('fileType','invalid image',(e)=>{
+  //   return['image/jpg','image/png','image/jpeg'].includes(e.type);
+  // })
+
+});
+
+ const {handleChange,handleSubmit,errors,touched,values,setFieldValue} = useFormik({
   initialValues:{
     product_name:data.product_name,
     product_price:data.product_price,
@@ -66,8 +80,8 @@ const[updateProduct,{isLoading}] = useUpdateProductMutation();
       
     }
 
-  }
-
+  },
+validationSchema:productSchema
  })
 
   return (
@@ -88,7 +102,7 @@ const[updateProduct,{isLoading}] = useUpdateProductMutation();
             value={values.product_name}
           />
 
-        
+        {errors.product_name && touched.product_name && <h1 className="text-red-500">{errors.product_name}</h1>}
 
           <Input
             size="lg"
@@ -101,7 +115,8 @@ const[updateProduct,{isLoading}] = useUpdateProductMutation();
             
           />
 
-          
+{errors.product_price && touched.product_price && <h1 className="text-red-500">{errors.product_price}</h1>}
+
 
           <Input
             size="lg"
@@ -113,6 +128,7 @@ const[updateProduct,{isLoading}] = useUpdateProductMutation();
             onChange={handleChange}
           
           />
+ {errors.countInStock && touched.countInStock && <h1 className="text-red-500">{errors.countInStock}</h1>}
 
       <Input
             size="lg"
@@ -124,7 +140,7 @@ const[updateProduct,{isLoading}] = useUpdateProductMutation();
             value={values.category}
           />
 
-
+{errors.category && touched.category && <h1 className="text-red-500">{errors.category}</h1>}
 
           <Textarea
             size="lg"
@@ -135,6 +151,7 @@ const[updateProduct,{isLoading}] = useUpdateProductMutation();
             onChange={handleChange}
             value={values.product_detail}
           />
+ {errors.product_detail && touched.product_detail && <h1 className="text-red-500">{errors.product_detail}</h1>}
 
           <div className="space-y-2">
             <h1>Select An Image</h1>
@@ -151,6 +168,9 @@ const[updateProduct,{isLoading}] = useUpdateProductMutation();
                 }
               }}
             />
+
+ {errors.product_image && touched.product_image && <h1 className="text-red-500">{errors.product_image}</h1>}
+
            {values.imageReview && <img src={values.product_image === null ? `${imageUrl}${values.imageReview}` : values.imageReview} alt="" />}
           </div>
         </div>

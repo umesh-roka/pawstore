@@ -10,11 +10,14 @@ import {
 
  
 import { imageUrl } from "../../constant/constant";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useGetProductQuery } from "../../Api/productApi";
+import ProductPagination from "../product/ProductPagination";
  
 const Accessories =()=> {
-
+  
+const location = useLocation();
+  const isProductPage = location.pathname === '/accessories'
 const {data,isLoading} = useGetProductQuery();
 console.log(data);
 const nav = useNavigate();
@@ -56,6 +59,10 @@ const nav = useNavigate();
 
 
 </div>
+{isProductPage && <div className="lg:ml-[500px] p-4 mt-10">
+  <ProductPagination/>
+  </div> }
+
     </div>
  
 

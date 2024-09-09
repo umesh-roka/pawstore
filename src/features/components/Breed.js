@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardHeader,
@@ -10,11 +10,18 @@ import {
 import { useGetPetsQuery } from "../../Api/petApi";
 import { imageUrl } from "../../constant/constant";
 import { useLocation, useNavigate } from "react-router";
+import PetPagination from '../pets/PetPagination';
+
 
 const Breed = () => {
+  const [active,setActive] = useState(1)
+  useEffect(()=>{
+    return window.scrollTo(0,0)
+  })
+
   const location = useLocation()
    const isBreedPage = location.pathname === '/pets'
-  const { data, isLoading } = useGetPetsQuery();
+  const { data, isLoading } = useGetPetsQuery({page:active});
   const [selectedCategory, setSelectedCategory] = useState('All'); // State for selected category
   const nav = useNavigate();
 
@@ -83,6 +90,10 @@ const Breed = () => {
           ))
         )}
       </div>
+     
+        {isBreedPage && <div className='lg:ml-[500px] mt-10 p-4'><PetPagination data ={data} active={active} setActive={setActive}/>
+      </div> }
+     
     </div>
   );
 }

@@ -4,8 +4,10 @@ import Breed from '../components/Breed'
 import Accessories from '../components/Accessories'
 import { Button, Typography } from '@material-tailwind/react'
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
+  const {user}= useSelector((state)=>state.userSlice);
   return (
     <>
     <div class="grid sm:grid-cols-1 lg:grid-cols-2 justify-center lg:px-[200px] sm:py-[20px]  items-center sm:pt-10 bg-orange-100 gap-4">
@@ -18,9 +20,12 @@ const Home = () => {
 </div>
 <div className='bg-gray-100'>
  <Breed/>
- <NavLink to='/pets'>
+ {user ? (user.isAdmin?'':<NavLink to='/pets'>
   <Button className='uppercase sm:ml-[150px] lg:mx-[700px] my-[20px]'>See more</Button>
-  </NavLink> </div>
+  </NavLink>):<NavLink to='/pets'>
+  <Button className='uppercase sm:ml-[150px] lg:mx-[700px] my-[20px]'>See more</Button>
+  </NavLink>}
+ </div>
  <figure className="relative h-96 my-7 ">
        <img
          className="h-full   object-cover w-full object-center"
@@ -37,9 +42,12 @@ const Home = () => {
      </figure>
  <div className='bg-orange-200'>
   <Accessories/>
-  <NavLink to='/accessories'>
+  {user?(user.isAdmin ?'':<NavLink to='/accessories'>
   <Button className='uppercase sm:ml-[150px] lg:mx-[700px] my-[20px]'>See more</Button>
-  </NavLink>
+  </NavLink>):<NavLink to='/accessories'>
+  <Button className='uppercase sm:ml-[150px] lg:mx-[700px] my-[20px]'>See more</Button>
+  </NavLink>}
+
  </div>
  <figure className="relative h-96 my-7 ">
        <img

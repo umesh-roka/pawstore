@@ -1,16 +1,27 @@
-import { Avatar, Button, Card, Typography } from "@material-tailwind/react";
+import { Avatar, Button, Card, CardFooter, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { useGetPetsQuery, useRemovePetMutation } from "../../Api/petApi";
 import { imageUrl } from "../../constant/constant";
 import { toast } from "react-toastify";
+import PetPagination from "./PetPagination";
+import { useEffect, useState } from "react";
 
 
 const AdminPet = () => {
   const {user} = useSelector((state)=>state.userSlice);
+
 const nav = useNavigate();
-const {data,isloading,error} = useGetPetsQuery();
-console.log(data);
+const [active,setActive] = useState(1);
+
+const {data,isloading,error} = useGetPetsQuery({page:active});
+
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, [active])
+
+
+
 const [removePet] = useRemovePetMutation();
 
   const TABLE_HEAD = ["", "Title", "CreatedAt",
@@ -26,6 +37,7 @@ const [removePet] = useRemovePetMutation();
 
       }
     }
+   
 
   return (
     <div className=" lg:ml-[100px]  p-5">
@@ -93,6 +105,9 @@ const [removePet] = useRemovePetMutation();
             })}
           </tbody>
         </table>
+        <CardFooter className="lg:ml-[200px] mt-10 p-4">
+          <PetPagination data={data} active={active} setActive={setActive}/>
+        </CardFooter>
       </Card>}
 
     </div>

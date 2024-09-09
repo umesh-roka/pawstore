@@ -36,9 +36,12 @@ providesTags:['Pet']
 
   // getting all Pets
   getPets:builder.query({
-    query:()=>({
+    query:(query)=>({
       url:'/',
       method:'GET',
+      params:{
+        page:query?.page
+      }
     
     }),
     providesTags:['Pet']

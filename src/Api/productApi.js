@@ -25,9 +25,12 @@ export const productApi = createApi({
 
     // get all products
     getProduct:builder.query({
-      query:()=>({
+      query:(query)=>({
         url:'/',
         method:'GET',
+        params:{
+          page:query?.page
+        }
       }),
       providesTags:['Product']
     }),

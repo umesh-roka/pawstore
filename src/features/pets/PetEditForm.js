@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { useUpdatePetMutation } from '../../Api/petApi';
 import { imageUrl } from '../../constant/constant';
+import * as yup from 'yup'
 
 const petGen = [
   { label: 'Male', color: 'red', value: 'male' },
@@ -22,11 +23,24 @@ const petGen = [
 ];
 
 const PetEditForm = ({ data }) => {
+  const petEditSchema = yup.object({
+
+    pet_name:yup.string().required('Pet name is required'),
+    pet_detail:yup.string().required('Pet detail is required'),
+    pet_price:yup.number().required('Pet price is required'),
+    pet_breed:yup.string().required('Pet breed is required'),
+    pet_category:yup.string().required('Pet category is required'),
+    pet_gender:yup.string().required('Pet gender is required'),
+    countInStock:yup.string().required('Count in stock is required'),
+    pet_image:yup.mixed().required('provide valid image with ext.. jpg , png , jpeg').test('fileType','invalid image',(e)=>{
+      return['image/jpg','image/png','image/jpeg'].includes(e.type)
+    })
+  })
   const nav = useNavigate();
   const{user} = useSelector((state)=>state.userSlice);
   const [updatePet, { isLoading }] = useUpdatePetMutation();
 
-  const { handleSubmit, handleChange,values,  setFieldValue } = useFormik({
+  const { handleSubmit,errors,touched, handleChange,values,  setFieldValue } = useFormik({
     initialValues: {
       pet_name: data.pet_name ,
       pet_detail: data.pet_detail ,
@@ -73,7 +87,8 @@ nav(-1)
       } catch (err) {
         toast.error('something gets wrong')
       }
-    }
+    },
+    validationSchema:petEditSchema
   });
 
   return (
@@ -93,7 +108,7 @@ nav(-1)
             onChange={handleChange}
             value={values.pet_name}
           />
-
+    {errors.pet_name && touched.pet_name && <h1 className='text-red-500'>{errors.pet_name}</h1>}
           <Input
             size="lg"
             placeholder="Pet Breed"
@@ -103,7 +118,7 @@ nav(-1)
             onChange={handleChange}
             value={values.pet_breed}
           />
-
+ {errors.pet_breed && touched.pet_breed && <h1 className='text-red-500'>{errors.pet_breed}</h1>}
           <Input
             size="lg"
             placeholder="Pet Price"
@@ -113,7 +128,7 @@ nav(-1)
             onChange={handleChange}
             value={values.pet_price}
           />
-
+ {errors.pet_price && touched.pet_price && <h1 className='text-red-500'>{errors.pet_price}</h1>}
           <div>
             <h1>Select the Gender</h1>
             {petGen.map((gen, i) => (
@@ -128,6 +143,7 @@ nav(-1)
                 <span>{gen.label}</span>
               </label>
             ))}
+             {errors.pet_gender && touched.pet_gender && <h1 className='text-red-500'>{errors.pet_gender}</h1>}
           </div>
 
           <Select
@@ -148,7 +164,7 @@ nav(-1)
             onChange={handleChange}
             value={values.countInStock}
           />
-
+ {errors.countInStock && touched.countInStock && <h1 className='text-red-500'>{errors.countInStock}</h1>}
           <Textarea
             size="lg"
             placeholder="Pet Detail"
@@ -176,6 +192,8 @@ nav(-1)
              accept="image/*"
              
             />
+             {errors.pet_image && touched.pet_image && <h1 className='text-red-500'>{errors.pet_image}</h1>}
+
             {values.imageReview && <img src={values.pet_image === null ? `${imageUrl}${values.imageReview}` : values.imageReview} alt="" />}
           </div>
         </div>
