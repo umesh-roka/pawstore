@@ -13,12 +13,17 @@ import { imageUrl } from "../../constant/constant";
 import { useLocation, useNavigate } from "react-router";
 import { useGetProductQuery } from "../../Api/productApi";
 import ProductPagination from "../product/ProductPagination";
+import { useEffect, useState } from "react";
  
 const Accessories =()=> {
-  
+  const [active, setActive] = useState(1)
+
+  useEffect(()=>{
+    return window.scrollTo(0,0)
+  })
 const location = useLocation();
   const isProductPage = location.pathname === '/accessories'
-const {data,isLoading} = useGetProductQuery();
+const {data,isLoading} = useGetProductQuery({page:active});
 console.log(data);
 const nav = useNavigate();
   return (
@@ -60,7 +65,7 @@ const nav = useNavigate();
 
 </div>
 {isProductPage && <div className="lg:ml-[500px] p-4 mt-10">
-  <ProductPagination/>
+  <ProductPagination active={active} setActive={setActive}/>
   </div> }
 
     </div>
