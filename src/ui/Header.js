@@ -114,8 +114,9 @@ function ProfileMenu({ user }) {
 
 
 const Header =()=> {
-  useEffect(()=>{
-    return window.scrollTo(0,0)
+  useEffect(()=>
+  {
+    return window.scrollTo(0,0);
   })
   const {carts} = useSelector((state)=>state.cartSlice);
   const totalItems = carts.reduce((sum, item) => sum + (Array.isArray(item) ? item.length : 1), 0);
@@ -141,6 +142,9 @@ const Header =()=> {
       () => window.innerWidth >= 960 && setOpenNav(false),
     );
   }, []);
+  const handleNavItemClick = ()=>{
+    setOpenNav(false);
+  }
  
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center  font-bold text-lg lg:gap-6">
@@ -149,14 +153,14 @@ const Header =()=> {
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
-       <NavLink>Home</NavLink>
+       <NavLink onClick={handleNavItemClick}>Home</NavLink>
       </Typography>
       <Typography
         as="li"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
-        {user ? (user.isAdmin ? <NavLink to = '/adminpet'>Pets</NavLink>:<NavLink to ='/pets'>Pets</NavLink>) : <NavLink to ='/pets'>Pets</NavLink>}
+        {user ? (user.isAdmin ? <NavLink onClick={handleNavItemClick} to = '/adminpet'>Pets</NavLink>:<NavLink onClick={handleNavItemClick} to ='/pets'>Pets</NavLink>) : <NavLink onClick={handleNavItemClick} to ='/pets'>Pets</NavLink>}
         
         
        
@@ -168,21 +172,21 @@ const Header =()=> {
         className="flex items-center gap-x-2 p-1 font-medium"
       >
     
-      {user ? (user.isAdmin ? <NavLink to = '/adminproduct'>Accessories</NavLink>:<NavLink to ='/accessories'>Accessories</NavLink>) : <NavLink to ='/accessories'>Accessories</NavLink>}
+      {user ? (user.isAdmin ? <NavLink onClick={handleNavItemClick} to = '/adminproduct'>Accessories</NavLink>:<NavLink onClick={handleNavItemClick} to ='/accessories'>Accessories</NavLink>) : <NavLink onClick={handleNavItemClick} to ='/accessories'>Accessories</NavLink>}
       </Typography>
       <Typography
         as="li"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
-       <NavLink>Blog</NavLink>
+       <NavLink onClick={handleNavItemClick}>Blog</NavLink>
       </Typography>
       <Typography
         as="li"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
-       <NavLink>Contact</NavLink>
+       <NavLink onClick={handleNavItemClick}>Contact</NavLink>
 
        </Typography>
 
@@ -238,7 +242,7 @@ const Header =()=> {
           </form>
 
               {/* cart */}
-              <NavLink to='/cartpage'>         
+              <NavLink onClick={handleNavItemClick} to='/cartpage'>         
        {totalItems > 0 ? <Badge content={totalItems} color="orange">
       <IconButton>
         <ShoppingCartIcon className="h-4 w-4" />
@@ -253,7 +257,7 @@ const Header =()=> {
 
 {/* login */}
 
-{user ? (<ProfileMenu user = {user}/>):(<NavLink to='login' className=''>
+{user ? (<ProfileMenu user = {user}/>):(<NavLink onClick={handleNavItemClick} to='login' className=''>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
   <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
 </svg>
@@ -375,7 +379,7 @@ const Header =()=> {
         <div className="container mx-auto">
           {navList}
       {/* cart */}
-       <NavLink to='/cartpage'>         
+       <NavLink onClick={handleNavItemClick} to='/cartpage'>         
        {totalItems > 0 ? <Badge content={totalItems} color="orange">
       <IconButton>
         <ShoppingCartIcon className="h-4 w-4" />
@@ -389,7 +393,7 @@ const Header =()=> {
 
 
 {/* login */}
-          {user ? (<ProfileMenu user = {user}/>):(<NavLink to='login' className=''>
+          {user ? (<ProfileMenu user = {user}/>):(<NavLink onClick={handleNavItemClick} to='login' className=''>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" color="black" class="size-10">
   <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
 </svg>
@@ -404,3 +408,17 @@ const Header =()=> {
 }
 
 export default Header;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
