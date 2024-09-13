@@ -10,15 +10,20 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addCart: (state, action) => {
-      state.carts.push(action.payload);
-      setCartsToLocal(state.carts);
-    },
-    updateCart: (state, action) => {
       const index = state.carts.findIndex(cart => cart.id === action.payload.id);
       if (index !== -1) {
         state.carts[index] = action.payload;
         setCartsToLocal(state.carts);
       }
+      else
+      {
+        state.carts.push(action.payload);
+        setCartsToLocal(state.carts);
+      }
+     
+    },
+    updateCart: (state, action) => {
+     
     },
     removeFromCart: (state, action) => {
       state.carts.splice(action.payload, 1);
