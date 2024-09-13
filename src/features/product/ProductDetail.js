@@ -10,15 +10,17 @@ import ProductReview from './ProductReview';
 const ProductDetail = () => {
 const { id } = useParams();
 const {user} = useSelector((state)=>state.userSlice);
-const {data,isLoading} = useGetProductByIdQuery(id);
+const {data,isLoading,isError,error} = useGetProductByIdQuery(id);
 if(isLoading){
   return <div>loading...</div>
 }
+
 const product = data?.data;
 console.log(product)
 
   return (
     <div className='my-4'>
+      
   <h1 className='font-bold text-4xl sm:ml-2 lg:ml-16 uppercase bg-orange-300 rounded-lg  w-fit px-2 py-1'>Product Detail</h1>
  <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
 
@@ -73,8 +75,8 @@ const handleSubmit =()=>{
     <Card className="h-[200px] lg:mb-[150px] w-full overflow-scroll">
     <table>
     <thead>
+
           <tr>
-            
               <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                 <Typography
                   variant="small"

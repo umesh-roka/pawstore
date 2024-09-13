@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   Typography,
@@ -35,13 +35,16 @@ const adminProfile = [
   { label: "Sign Out", icon: PowerIcon, value: 'logout' },
 ];
 
+
 function ProfileMenu({ user }) {
+
   const nav = useNavigate();
   const dispatch = useDispatch();
   const menuitems = user.isAdmin ? adminProfile : userProfile;
 
   const handleClick = (val) => {
     switch (val) {
+      
       case 'profile':
         nav('/userprofile')
         break;
@@ -60,7 +63,7 @@ function ProfileMenu({ user }) {
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
-
+ 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
@@ -408,17 +411,4 @@ const Header =()=> {
 }
 
 export default Header;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
