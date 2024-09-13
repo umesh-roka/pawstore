@@ -16,7 +16,7 @@ if(isLoading){
 }
 
 const product = data?.data;
-console.log(product)
+
 
   return (
     <div className='my-4'>
@@ -68,16 +68,17 @@ const isExist = carts.find((cart)=>cart._id === product._id);
       qty:isExist?.qty || 1,
     }
   })
-  
+  console.log(isExist?.id);
 const handleSubmit =()=>{
+   
   if(isExist){
-    dispatch(updateCart({...product,qty:formik.values.qty}))
-    nav('/cartpage');
-  }
+ return  <div>already</div> }
   else{
     dispatch(addCart({...product,qty:formik.values.qty}));
     nav('/cartpage');
   }
+  
+  
 
 }
   return (
