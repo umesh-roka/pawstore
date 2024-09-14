@@ -11,7 +11,7 @@ import {  setUser } from "../../Slice/userSlice";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
- 
+
 const Login=()=> {
   const nav = useNavigate();
 const dispatch = useDispatch();

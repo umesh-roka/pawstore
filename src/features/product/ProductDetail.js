@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Typography } from '@material-tailwind/react';
 import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
-import{addCart, updateCart} from '../../Slice/cartSlice'
+import{addCart} from '../../Slice/cartSlice'
 import { useGetProductByIdQuery } from '../../Api/productApi';
 import ProductReview from './ProductReview';
 const ProductDetail = () => {
@@ -50,11 +50,8 @@ const product = data?.data;
   )
 }
 
+
 export default ProductDetail;
-
-
-
-
 
 export const AddCart = ({ product }) => {
   const nav = useNavigate();
@@ -68,18 +65,11 @@ const isExist = carts.find((cart)=>cart._id === product._id);
       qty:isExist?.qty || 1,
     }
   })
-  console.log(isExist?.id);
-const handleSubmit =()=>{
-   
-  if(isExist){
- return  <div>already</div> }
-  else{
-    dispatch(addCart({...product,qty:formik.values.qty}));
-    nav('/cartpage');
-  }
-  
-  
+ 
 
+const handleSubmit =()=>{
+  dispatch(addCart({...product,qty:formik.values.qty}));
+  nav('/cartpage');
 }
   return (
     <Card className="h-[200px] lg:mb-[150px] w-full overflow-scroll">
