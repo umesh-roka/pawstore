@@ -24,6 +24,7 @@ import SearchPage from './features/components/SearchPage'
 import NotFoundPage from './ui/NotFoundPage'
 import Contact from './features/components/Contact'
 import About from './features/components/About'
+import UsersFeedback from './features/user/UsersFeedback'
 
 
 
@@ -64,6 +65,8 @@ children:[
 
 {path:'contact',element:<Contact/>},
 {path:'about',element:<About/>},
+{path:'feedback',element:<UsersFeedback/>},
+
 
 
 

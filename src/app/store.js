@@ -6,6 +6,7 @@ import { petApi } from "../Api/petApi";
 import { cartSlice } from "../Slice/cartSlice";
 import { productApi } from "../Api/productApi";
 import { orderApi } from "../Api/orderApi";
+import { feedbackApi } from "../Api/feedbackApi";
 
 
 
@@ -16,13 +17,15 @@ export const store = configureStore({
     [userApi.reducerPath]:userApi.reducer,
     [petApi.reducerPath]:petApi.reducer,
     [productApi.reducerPath]:productApi.reducer,
-    [orderApi.reducerPath]:orderApi.reducer
+    [orderApi.reducerPath]:orderApi.reducer,
+    [feedbackApi.reducerPath]:feedbackApi.reducer
   },
   middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat([
     userApi.middleware,
     petApi.middleware,
     productApi.middleware,
-    orderApi.middleware
+    orderApi.middleware,
+    feedbackApi.middleware
   ])
 })
 

@@ -23,6 +23,7 @@ const Breed = () => {
   const location = useLocation()
    const isBreedPage = location.pathname === '/pets'
   const { data, isLoading } = useGetPetsQuery({page:active});
+  console.log(data);
   const [selectedCategory, setSelectedCategory] = useState('All'); // State for selected category
   const nav = useNavigate();
 

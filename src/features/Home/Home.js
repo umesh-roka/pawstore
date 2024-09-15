@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import FeedBack from '../components/FeedBack'
 
 const Home = () => {
+
   const {user}= useSelector((state)=>state.userSlice);
   return (
     <>

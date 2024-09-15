@@ -7,3 +7,4 @@ export const userUrl = `${baseUrl}/users`
 export const petUrl = `${baseUrl}/pets`
 export const productUrl = `${baseUrl}/products`
 export const orderUrl = `${baseUrl}/orders`
+export const feedbackUrl = `${baseUrl}/feedbacks`
