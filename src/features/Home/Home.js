@@ -5,6 +5,7 @@ import Accessories from '../components/Accessories'
 import { Button, Typography } from '@material-tailwind/react'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import FeedBack from '../components/FeedBack'
 
 const Home = () => {
   const {user}= useSelector((state)=>state.userSlice);
@@ -64,9 +65,9 @@ const Home = () => {
        </figcaption>
      </figure>
  
- 
-     
-
+    <div>
+      <FeedBack/>
+    </div>
 
 </>
   )
