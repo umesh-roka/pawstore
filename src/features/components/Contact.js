@@ -10,18 +10,27 @@ import {
  
 const Contact=()=> {
   return (
-    <div className=" mb-10 bg-orange-100 grid sm:grid-cols-1 lg:grid-cols-2 lg:py-6">
+    <div className="  bg-orange-100 grid mb-2 mt-2 pb-[80px] sm:grid-cols-1 lg:grid-cols-2 lg:py-6">
     <div>
       <h1 className="text-black uppercase text-2xl text-center font-bold">Contact Us</h1>
-      <ul className="lg:ml-[100px] text-xl text-gray-700 mt-[50px] font-bold space-y-5">
-        <li>Phone Number <br/>
+      <h1 className="text-justify text-lg mt-[20px] mx-5">Reach out to us for any queries or support related to your pet's needs. Whether you need advice, assistance, or have questions about our services, we're here to help you and your furry companions! Let's stay connected for a pawsitive experience.</h1>
+
+      <ul className="lg:ml-5 text-xl text-gray-700 mt-[30px] font-bold space-y-5">
+        
+        <div className="grid lg:grid-cols-2 sm:grid-cols-1">
+        <li className="flex  mb-4 ">Phone Number <br/>
         +977 9845682352
         </li>
+        <li className="flex  mb-4 ">Gmail <br/>
+        pawstore12@gmail.com
+        </li>
+        <li className="flex mb-[10px]"><img className='h-[40px]' src="https://static.vecteezy.com/system/resources/thumbnails/041/643/208/small/facebook-logo-facebook-icon-transparent-white-background-free-png.png" alt=" facebook" /> <h1 className="mt-1 ml-5">Facebook</h1></li>
+        <li className="flex mb-[10px]"><img className='h-[40px]' src="https://static.vecteezy.com/system/resources/thumbnails/027/209/183/small/instagram-button-icon-social-media-free-png.png" alt="instagram" /><h1 className="mt-1 ml-5 ">Instagram</h1></li>
+        <li className="flex ml-1 mb-[10px]"><img className='h-[30px] ' src="https://static.vecteezy.com/system/resources/thumbnails/016/716/480/small/whatsapp-icon-free-png.png" alt='gmail' /><h1 className="mt-1 ml-8">Whatsapp</h1></li>
+        <li className="flex ml-1 mb-[10px]"><img className='h-[30px] ' src="https://static.vecteezy.com/system/resources/thumbnails/034/716/139/small/x-new-twitter-logo-free-png.png" alt='gmail' /><h1 className="mt-1 ml-8">Twitter</h1></li>
+         </div>
         
-        <li><img className='h-[40px]' src="https://static.vecteezy.com/system/resources/thumbnails/041/643/208/small/facebook-logo-facebook-icon-transparent-white-background-free-png.png" alt=" facebook" /> <h1>Facebook</h1></li>
-        <li><img className='h-[40px]' src="https://static.vecteezy.com/system/resources/thumbnails/027/209/183/small/instagram-button-icon-social-media-free-png.png" alt="instagram" /><h1>Instagram</h1></li>
-        <li><img className='h-[30px] ' src="https://static.vecteezy.com/system/resources/thumbnails/016/716/480/small/whatsapp-icon-free-png.png" alt='gmail' /><h1>Whatsapp</h1></li>
-        <li><img className='h-[30px] ' src="https://static.vecteezy.com/system/resources/thumbnails/034/716/139/small/x-new-twitter-logo-free-png.png" alt='gmail' /><h1>Twitter</h1></li>
+     
       </ul>
     </div>
      <Card  className ="lg:ml-[20px] bg:gray-600 py-[40px] sm:px-[10px] lg:px-[40px] lg:mr-10" shadow={false}>
