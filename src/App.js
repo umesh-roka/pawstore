@@ -22,6 +22,8 @@ import OrderDetail from './features/order/OrderDetail'
 import UserProfile from './features/auth/UserProfile'
 import SearchPage from './features/components/SearchPage'
 import NotFoundPage from './ui/NotFoundPage'
+import Contact from './features/components/Contact'
+import About from './features/components/About'
 
 
 
@@ -59,6 +61,10 @@ children:[
 
 
 {path:'search-page/:query',element:<SearchPage/>},
+
+{path:'contact',element:<Contact/>},
+{path:'about',element:<About/>},
+
 
 
 {path:'*',element:<NotFoundPage/>}

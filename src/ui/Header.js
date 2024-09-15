@@ -138,7 +138,6 @@ const Header =()=> {
     }
   })
 
-
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -182,14 +181,14 @@ const Header =()=> {
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
-       <NavLink onClick={handleNavItemClick}>Blog</NavLink>
+       <NavLink onClick={handleNavItemClick} to='about'>About</NavLink>
       </Typography>
       <Typography
         as="li"
         color="blue-gray"
         className="flex items-center gap-x-2 p-1 font-medium"
       >
-       <NavLink onClick={handleNavItemClick}>Contact</NavLink>
+       <NavLink onClick={handleNavItemClick} to='contact'>Contact</NavLink>
 
        </Typography>
 

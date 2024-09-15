@@ -85,5 +85,4 @@ const FeedBack=()=> {
     </div>
   );
 }
-
 export default FeedBack;
