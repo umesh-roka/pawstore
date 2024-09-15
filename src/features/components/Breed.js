@@ -11,6 +11,7 @@ import { useGetPetsQuery } from "../../Api/petApi";
 import { imageUrl } from "../../constant/constant";
 import { useLocation, useNavigate } from "react-router";
 import PetPagination from '../pets/PetPagination';
+import LoadingPage from './LoadingPage';
 
 
 const Breed = () => {
@@ -54,7 +55,7 @@ const Breed = () => {
 
       <div className="mt-7  sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
         {isLoading ? (
-          <p>Loading...</p>
+          <LoadingPage/>
         ) : (
           filteredPets.map(({ _id, pet_name, pet_detail, pet_category, pet_image }) => (
              <Card key={_id} className="sm:w-[190px] 

@@ -7,19 +7,17 @@ import { imageUrl } from '../../constant/constant';
 import { useFormik } from 'formik';
 import{addCart} from '../../Slice/cartSlice'
 import PetReview from './PetReview';
+import DetailPageLoading from '../components/DetailPageLoading';
 const PetDetail = () => {
 const { id } = useParams();
 const {user} = useSelector((state)=>state.userSlice);
 const {data,isLoading} = useGetPetByIdQuery(id);
-console.log(data);
-if(isLoading){
-  return <div>loading...</div>
-}
+
 const pet = data?.data;
   return (
     <div className='my-4'>
   <h1 className='font-bold text-4xl ml-16 uppercase bg-orange-300 rounded-lg px-2 py-1 w-fit'>Pet Detail</h1>
- <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
+  {isLoading ? <DetailPageLoading/>: <div> <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
 
 <div className="image">
   <img className='w-full lg:mb-[140px] rounded-xl' src={`${imageUrl}${pet.pet_image}`} alt="" />
@@ -40,7 +38,8 @@ const pet = data?.data;
 </div>
 
 <div className='lg:ml-[50px]'><PetReview user={user} id={id} reviews={pet.reviews}/>
-  </div>
+  </div></div>}
+
     </div>
   )
 }

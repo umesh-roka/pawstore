@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
  
 const Signup = () => {
   const nav = useNavigate();
-const [userSignup,{isLoading}] = useUserSignupMutation();
+const [userSignup] = useUserSignupMutation();
 const{handleSubmit,handleChange,values} = useFormik({
   initialValues:{
     username:'',

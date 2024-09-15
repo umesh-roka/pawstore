@@ -7,22 +7,22 @@ import { useFormik } from 'formik';
 import{addCart} from '../../Slice/cartSlice'
 import { useGetProductByIdQuery } from '../../Api/productApi';
 import ProductReview from './ProductReview';
+import DetailPageLoading from '../components/DetailPageLoading';
 const ProductDetail = () => {
 const { id } = useParams();
 const {user} = useSelector((state)=>state.userSlice);
-const {data,isLoading,isError,error} = useGetProductByIdQuery(id);
-if(isLoading){
-  return <div>loading...</div>
-}
+const {data,isLoading} = useGetProductByIdQuery(id);
+
 
 const product = data?.data;
-
 
   return (
     <div className='my-4'>
       
   <h1 className='font-bold text-4xl sm:ml-2 lg:ml-16 uppercase bg-orange-300 rounded-lg  w-fit px-2 py-1'>Product Detail</h1>
- <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
+
+  {isLoading ? <DetailPageLoading/>:<div>
+    <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
 
 <div className="image">
   <img className='w-full h-[400px] rounded-xl' src={`${imageUrl}${product.product_image}`} alt="" />
@@ -45,7 +45,8 @@ const product = data?.data;
 
 </div>
 <div className='lg:ml-[50px]'><ProductReview reviews={product.reviews}/>
-  </div> 
+  </div> </div>}
+ 
    </div>
   )
 }
