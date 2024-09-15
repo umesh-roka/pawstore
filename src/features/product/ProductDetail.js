@@ -20,7 +20,7 @@ const product = data?.data;
   return (
     <div className='my-4'>
       
-  <h1 className='font-bold text-4xl sm:ml-2 lg:ml-16 uppercase bg-orange-300 rounded-lg  w-fit px-2 py-1'>Product Detail</h1>
+  {!error && <h1 className='font-bold text-4xl sm:ml-2 lg:ml-16 uppercase bg-orange-300 rounded-lg  w-fit px-2 py-1'>Product Detail</h1>}
 
   {isLoading ? <DetailPageLoading/>: error ?<NotGettingData/>:<div>
     <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
