@@ -8,10 +8,11 @@ import{addCart} from '../../Slice/cartSlice'
 import { useGetProductByIdQuery } from '../../Api/productApi';
 import ProductReview from './ProductReview';
 import DetailPageLoading from '../components/DetailPageLoading';
+import NotGettingData from '../../ui/NotGettingData';
 const ProductDetail = () => {
 const { id } = useParams();
 const {user} = useSelector((state)=>state.userSlice);
-const {data,isLoading} = useGetProductByIdQuery(id);
+const {data,isLoading,error} = useGetProductByIdQuery(id);
 
 
 const product = data?.data;
@@ -21,7 +22,7 @@ const product = data?.data;
       
   <h1 className='font-bold text-4xl sm:ml-2 lg:ml-16 uppercase bg-orange-300 rounded-lg  w-fit px-2 py-1'>Product Detail</h1>
 
-  {isLoading ? <DetailPageLoading/>:<div>
+  {isLoading ? <DetailPageLoading/>: error ?<NotGettingData/>:<div>
     <div className='grid sm:grid-cols-1 2xl:grid-cols-3 lg:mx-[50px] p-4 items-center gap-10'>
 
 <div className="image">
