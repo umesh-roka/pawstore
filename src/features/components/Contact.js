@@ -6,6 +6,7 @@ import {
   Typography,
   Textarea,
 } from "@material-tailwind/react";
+import { NavLink } from "react-router-dom";
 
  
 const Contact=()=> {
@@ -18,16 +19,33 @@ const Contact=()=> {
       <ul className="lg:ml-5 text-xl text-gray-700 mt-[30px] font-bold space-y-5">
         
         <div className="grid lg:grid-cols-2 sm:grid-cols-1">
-        <li className="flex  mb-4 ">Phone Number <br/>
+       <NavLink> <li className="flex  mb-4 ">Phone Number <br/>
         +977 9845682352
         </li>
+        </NavLink>
+        
+        <NavLink>
         <li className="flex  mb-4 ">Gmail <br/>
         pawstore12@gmail.com
         </li>
+        </NavLink>
+
+        <NavLink>
         <li className="flex mb-[10px]"><img className='h-[40px]' src="https://static.vecteezy.com/system/resources/thumbnails/041/643/208/small/facebook-logo-facebook-icon-transparent-white-background-free-png.png" alt=" facebook" /> <h1 className="mt-1 ml-5">Facebook</h1></li>
+        </NavLink>
+
+        <NavLink>
         <li className="flex mb-[10px]"><img className='h-[40px]' src="https://static.vecteezy.com/system/resources/thumbnails/027/209/183/small/instagram-button-icon-social-media-free-png.png" alt="instagram" /><h1 className="mt-1 ml-5 ">Instagram</h1></li>
+        </NavLink>
+
+        <NavLink>
         <li className="flex ml-1 mb-[10px]"><img className='h-[30px] ' src="https://static.vecteezy.com/system/resources/thumbnails/016/716/480/small/whatsapp-icon-free-png.png" alt='gmail' /><h1 className="mt-1 ml-8">Whatsapp</h1></li>
+        </NavLink>
+
+        <NavLink>
         <li className="flex ml-1 mb-[10px]"><img className='h-[30px] ' src="https://static.vecteezy.com/system/resources/thumbnails/034/716/139/small/x-new-twitter-logo-free-png.png" alt='gmail' /><h1 className="mt-1 ml-8">Twitter</h1></li>
+        </NavLink>
+        
          </div>
         
      

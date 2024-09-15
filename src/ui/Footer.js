@@ -13,19 +13,21 @@ const Footer=()=> {
           <div className="grid pt-20 sm:grid-cols-1 lg:grid-cols-2 justify-between gap-4">
             <div className="grid grid-cols-2">
               <div className="flex flex-col gap-3"> <h1 className="font-bold ">Quick Links</h1>
-              <NavLink>Home</NavLink>
-              <NavLink>Breed</NavLink>
-              <NavLink>Accessories</NavLink>
-              <NavLink>Blog</NavLink>
-              <NavLink>Contact</NavLink>
-              <NavLink>Login</NavLink>
+              <NavLink to='/'>Home</NavLink>
+              <NavLink to='/pets'>Pets</NavLink>
+              <NavLink to='/accessories'>Accessories</NavLink>
+              <NavLink to='/about'>About</NavLink>
+              <NavLink to='/contact'>Contact</NavLink>
+              <NavLink to='/login'>Login</NavLink>
               </div>
               <div className="flex flex-col gap-3">
                 <h1 className="font-bold ">Contact</h1>
-                <NavLink>Kathamandu,Nepal</NavLink>
-                <NavLink>9841215126</NavLink>
+                        <h1>Kathamandu,Nepal</h1>
+                       <h1>+977 9841215126</h1>
                 <NavLink>Facebook</NavLink>
                 <NavLink>Instagram</NavLink>
+                <NavLink>Whatsapp</NavLink>
+                <NavLink>Twitter</NavLink>
               </div>
            </div>
            <div className="flex justify-center items-center">
