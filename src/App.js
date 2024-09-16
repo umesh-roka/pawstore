@@ -25,6 +25,7 @@ import NotFoundPage from './ui/NotFoundPage'
 import Contact from './features/components/Contact'
 import About from './features/components/About'
 import UsersFeedback from './features/user/UsersFeedback'
+import UserRoutes from './ui/UserRoutes'
 
 
 
@@ -32,9 +33,16 @@ const router = createBrowserRouter([{
 path:'/',
 element:<RouteLayout/>,
 children:[
+
+  {element:<UserRoutes/>,
+    children:[
+      {path:'login',element:<Login/>},
+      {path:'signup',element:<Signup/>},
+
+    ]
+  },
+
 {index:true, element:<Home/>},
-{path:'login',element:<Login/>},
-{path:'signup',element:<Signup/>},
 {path:'userprofile',element:<UserProfile/>},
 
 
