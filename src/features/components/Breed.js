@@ -38,7 +38,7 @@ const Breed = () => {
 
   return (
     <div className=' pb-8'>
-      <h1 className='font-bold text-4xl uppercase py-6 text-center pt-6'>Pets</h1>
+      {!error && <h1 className='font-bold text-4xl uppercase py-6 text-center pt-6'>Pets</h1>}
 
       {/* Category filter options */}
       {isBreedPage && (<div className='text-center mb-4'>

@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import ProductPagination from "./ProductPagination";
+import LoadingPage from "../components/LoadingPage";
+import NotGettingData from "../../ui/NotGettingData";
 
 
 const AdminProduct = () => {
@@ -39,12 +41,13 @@ const[removeproduct] = useRemoveProductMutation();
 
   return (
     <div className=" lg:ml-[100px] p-5">
-      <div className="mb-4 flex justify-between">
+      {!error && <div className="mb-4 flex justify-between">
         <h1 className="text-2xl font-semibold">Welcome To Pow Store</h1>
         <Button onClick={()=>nav('/addproduct')} className="py-2 px-4" color="orange" size="lg">Add products</Button>
-      </div>
-
-      {<Card className="sm:max-w-2xl lg:max-w-4xl ">
+      </div> }
+      
+        {isLoading ? <LoadingPage/>:error ? <NotGettingData/>:<div>
+          {<Card className="sm:max-w-2xl lg:max-w-4xl ">
         <table className=" table-auto text-left">
           <thead>
             <tr>
@@ -105,7 +108,8 @@ const[removeproduct] = useRemoveProductMutation();
         <CardFooter className="lg:ml-[200px] mt-10 p-4">
           <ProductPagination active={active} setActive={setActive} />
         </CardFooter>
-      </Card>}
+      </Card>}</div>}
+      
 
     </div>
   )
