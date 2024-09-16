@@ -16,7 +16,6 @@ import AdminProduct from './features/product/AdminProduct'
 import ProductEdit from './features/product/ProductEdit'
 import Accessories from './features/components/Accessories'
 import ProductDetail from './features/product/ProductDetail'
-import Ordered from './features/order/Ordered'
 import UserOrder from './features/order/UserOrder'
 import OrderDetail from './features/order/OrderDetail'
 import UserProfile from './features/auth/UserProfile'
@@ -27,6 +26,7 @@ import About from './features/components/About'
 import UsersFeedback from './features/user/UsersFeedback'
 import UserRoutes from './ui/UserRoutes'
 import AdminRoutes from './ui/AdminRoutes'
+import UserSecRoutes from './ui/UserSecRoutes'
 
 
 
@@ -40,6 +40,7 @@ children:[
       {path:'login',element:<Login/>},
       {path:'signup',element:<Signup/>},
 
+
     ]
   },
 
@@ -51,33 +52,31 @@ children:[
       {path:'addproduct',element:<AddProductForm/>},
       {path:'adminproduct',element:<AdminProduct/>},
       {path:'productedit/:id',element:<ProductEdit/>},
+      {path:'feedback',element:<UsersFeedback/>},
+
+    ]
+  },
+  {
+    element:<UserSecRoutes/>,
+    children:[
+      {path:'userorder',element:<UserOrder/>},
+      {path:'order/:id',element:<OrderDetail/>},
+      {path:'cartpage',element:<CartPage/>},
+      {path:'orderpage',element:<OrderPage/>},
+      {path:'userprofile',element:<UserProfile/>},
     ]
   },
 
-{index:true, element:<Home/>},
-{path:'userprofile',element:<UserProfile/>},
 
+{index:true, element:<Home/>},
 
 {path:'pets',element:<Breed/>},
-
 {path:'petdetail/:id',element:<PetDetail/>},
-{path:'cartpage',element:<CartPage/>},
-{path:'orderpage',element:<OrderPage/>},
-
-
 {path:'productdetail/:id',element:<ProductDetail/>},
-
 {path:'Accessories',element:<Accessories/>},
-{path:'order',element:<Ordered/>},
-{path:'userorder',element:<UserOrder/>},
-{path:'order/:id',element:<OrderDetail/>},
-
-
 {path:'search-page/:query',element:<SearchPage/>},
-
 {path:'contact',element:<Contact/>},
 {path:'about',element:<About/>},
-{path:'feedback',element:<UsersFeedback/>},
 
 
 
