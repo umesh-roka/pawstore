@@ -29,7 +29,7 @@ export default LoadingPage;
 
 export const Loading = ()=>{
   return (
-    <Card className="mt-6 w-96 animate-pulse">
+    <Card className="sm:w-[190px] lg:w-[250px] lg:h-[350px]  animate-pulse">
       <CardHeader
         shadow={false}
         floated={false}
