@@ -15,7 +15,7 @@ import {
 } from "@material-tailwind/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ChevronDownIcon, Message, PowerIcon, ShoppingCartIcon, UserCircleIcon } from "@heroicons/react/16/solid";
+import { ChevronDownIcon, Cog6ToothIcon, PowerIcon, ShoppingCartIcon, UserCircleIcon } from "@heroicons/react/16/solid";
 import { userLogout } from "../Slice/userSlice";
 import { useFormik } from "formik";
 import { clearAll } from "../Slice/cartSlice";
@@ -31,7 +31,7 @@ const userProfile = [
 
 const adminProfile = [
   { label: "My Profile", icon: UserCircleIcon, value: 'profile' },
-  { label: "User Feedback", icon: Message , value: 'message' },
+  { label: "User Feedback", icon: Cog6ToothIcon, value: 'message' },
   { label: "Sign Out", icon: PowerIcon, value: 'logout' },
 ];
 
