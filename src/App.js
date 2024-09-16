@@ -26,6 +26,7 @@ import Contact from './features/components/Contact'
 import About from './features/components/About'
 import UsersFeedback from './features/user/UsersFeedback'
 import UserRoutes from './ui/UserRoutes'
+import AdminRoutes from './ui/AdminRoutes'
 
 
 
@@ -42,25 +43,28 @@ children:[
     ]
   },
 
+  {element:<AdminRoutes/>,
+    children:[
+      {path:'addpet',element:<AddPetForm/>},
+      {path:'adminpet',element:<AdminPet/>},
+      {path:'petedit/:id',element:<PetEdit/>},
+      {path:'addproduct',element:<AddProductForm/>},
+      {path:'adminproduct',element:<AdminProduct/>},
+      {path:'productedit/:id',element:<ProductEdit/>},
+    ]
+  },
+
 {index:true, element:<Home/>},
 {path:'userprofile',element:<UserProfile/>},
 
 
-
-
-
-
 {path:'pets',element:<Breed/>},
-{path:'addpet',element:<AddPetForm/>},
-{path:'adminpet',element:<AdminPet/>},
-{path:'petedit/:id',element:<PetEdit/>},
+
 {path:'petdetail/:id',element:<PetDetail/>},
 {path:'cartpage',element:<CartPage/>},
 {path:'orderpage',element:<OrderPage/>},
 
-{path:'addproduct',element:<AddProductForm/>},
-{path:'adminproduct',element:<AdminProduct/>},
-{path:'productedit/:id',element:<ProductEdit/>},
+
 {path:'productdetail/:id',element:<ProductDetail/>},
 
 {path:'Accessories',element:<Accessories/>},
