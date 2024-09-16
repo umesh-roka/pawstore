@@ -8,6 +8,7 @@ import PetPagination from "./PetPagination";
 import { useEffect, useState } from "react";
 import LoadingPage from "../components/LoadingPage";
 import NotGettingData from "../../ui/NotGettingData";
+import AdminLoadingpage from "../../ui/AdminLoadingpage";
 
 
 const AdminPet = () => {
@@ -47,7 +48,7 @@ const [removePet] = useRemovePetMutation();
         <h1 className="text-2xl font-semibold">Welcome To Pow Store</h1>
         <Button onClick={()=>nav('/addpet')} className="py-2 px-4" color="orange" size="lg">Add Pets</Button>
       </div>} 
-      {isloading ? <LoadingPage/> : error ? <NotGettingData/>:<div>
+      {isloading ? <AdminLoadingpage/> : error ? <NotGettingData/>:<div>
         {<Card className="sm:max-w-2xl lg:max-w-4xl ">
         <table className=" table-auto text-left">
           <thead>

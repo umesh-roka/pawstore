@@ -9,11 +9,12 @@ import { useEffect, useState } from "react";
 import ProductPagination from "./ProductPagination";
 import LoadingPage from "../components/LoadingPage";
 import NotGettingData from "../../ui/NotGettingData";
+import AdminLoadingpage from "../../ui/AdminLoadingpage";
 
 
 const AdminProduct = () => {
   const [active, setActive] = useState(1)
-  const {data,isloading,error} = useGetProductQuery({page:active});
+  const {data,isLoading,error} = useGetProductQuery({page:active});
 
   useEffect(()=>{
     return window.scrollTo(0,0);
@@ -46,7 +47,7 @@ const[removeproduct] = useRemoveProductMutation();
         <Button onClick={()=>nav('/addproduct')} className="py-2 px-4" color="orange" size="lg">Add products</Button>
       </div> }
       
-        {isLoading ? <LoadingPage/>:error ? <NotGettingData/>:<div>
+        {isLoading ? <AdminLoadingpage/> :error ? <NotGettingData/>:<div>
           {<Card className="sm:max-w-2xl lg:max-w-4xl ">
         <table className=" table-auto text-left">
           <thead>
