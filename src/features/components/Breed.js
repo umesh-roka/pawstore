@@ -53,45 +53,45 @@ const Breed = () => {
         ))}
       </div>)}
       
+      {isLoading ? <LoadingPage/> : error ? <NotGettingData/> :
+       <div className="mt-7  sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
+       {(
+         filteredPets.map(({ _id, pet_name, pet_detail, pet_category, pet_image }) => (
+            <Card key={_id} className="sm:w-[190px] 
+           shadow-2xl shadow-blue-gray-500/50
+            hover:shadow-orange-200 lg:w-[250px] lg:h-[350px] bg-orange-100 ">
+             <CardHeader floated={false} color="blue-gray">
+               <img
+                 className="lg:h-[150px] lg:w-full"
+                 src={`${imageUrl}${pet_image}`}
+                 alt={pet_name}
+               />
+             </CardHeader>
+             <CardBody>
+               <Typography className="font-bold text-lg">
+                 {pet_name}
+               </Typography>
+               <Typography className='truncate'>
+                 {pet_category}
+               </Typography>
+               <Typography className='truncate'>
+                 {pet_detail}
+               </Typography>
+             </CardBody>
+             <CardFooter className="pt-0 sm:text-sm">
+               <button
+                 className='bg-black text-white px-4 py-1 rounded-lg sm:text-sm font-bold'
+                 onClick={() => nav(`/petdetail/${_id}`)}
+               >
+                 More
+               </button>
+             </CardFooter>
+           </Card>
+         ))
+       )}
+     </div>}
 
-      <div className="mt-7  sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
-        {isLoading ? (
-          <LoadingPage/>
-        ) : error ?  <NotGettingData/> :(
-          filteredPets.map(({ _id, pet_name, pet_detail, pet_category, pet_image }) => (
-             <Card key={_id} className="sm:w-[190px] 
-            shadow-2xl shadow-blue-gray-500/50
-             hover:shadow-orange-200 lg:w-[250px] lg:h-[350px] bg-orange-100 ">
-              <CardHeader floated={false} color="blue-gray">
-                <img
-                  className="lg:h-[150px] lg:w-full"
-                  src={`${imageUrl}${pet_image}`}
-                  alt={pet_name}
-                />
-              </CardHeader>
-              <CardBody>
-                <Typography className="font-bold text-lg">
-                  {pet_name}
-                </Typography>
-                <Typography className='truncate'>
-                  {pet_category}
-                </Typography>
-                <Typography className='truncate'>
-                  {pet_detail}
-                </Typography>
-              </CardBody>
-              <CardFooter className="pt-0 sm:text-sm">
-                <button
-                  className='bg-black text-white px-4 py-1 rounded-lg sm:text-sm font-bold'
-                  onClick={() => nav(`/petdetail/${_id}`)}
-                >
-                  More
-                </button>
-              </CardFooter>
-            </Card>
-          ))
-        )}
-      </div>
+     
      
         {isBreedPage && <div className='lg:ml-[500px] mt-10 p-4'><PetPagination data ={data} active={active} setActive={setActive}/>
       </div> }
