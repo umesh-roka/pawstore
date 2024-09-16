@@ -10,7 +10,7 @@ const DetailPageLoading=()=> {
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="currentColor"
-          className="h-12 w-12 text-gray-500"
+          className="w-full lg:mb-[140px] rounded-xl text-gray-500"
         >
           <path
             strokeLinecap="round"
