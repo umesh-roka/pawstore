@@ -10,6 +10,23 @@ import {
 
 
 const LoadingPage=()=> {
+return (
+  <>
+  <div className=" grid lg:grid-cols-5">
+    <Loading/>
+    <Loading/>
+    <Loading/>
+    <Loading/>
+  </div>
+  </>
+)
+}
+
+export default LoadingPage;
+
+
+
+export const Loading = ()=>{
   return (
     <Card className="mt-6 w-96 animate-pulse">
       <CardHeader
@@ -81,5 +98,3 @@ const LoadingPage=()=> {
     </Card>
   );
 }
-
-export default LoadingPage;
