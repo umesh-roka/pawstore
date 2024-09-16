@@ -31,7 +31,7 @@ const userProfile = [
 
 const adminProfile = [
   { label: "My Profile", icon: UserCircleIcon, value: 'profile' },
-  { label: "Edit Profile", icon: Cog6ToothIcon, value: 'setting' },
+  { label: "User Feedback", icon: Cog6ToothIcon, value: 'message' },
   { label: "Sign Out", icon: PowerIcon, value: 'logout' },
 ];
 
@@ -48,8 +48,8 @@ function ProfileMenu({ user }) {
       case 'profile':
         nav('/userprofile')
         break;
-      case 'products':
-        nav('/allProducts');
+      case 'message':
+        nav('/feedback');
         break;
       case 'logout':
         dispatch(userLogout());
