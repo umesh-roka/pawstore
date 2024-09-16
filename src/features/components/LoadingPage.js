@@ -41,7 +41,7 @@ export const Loading = ()=>{
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="currentColor"
-          className="h-12 w-12 text-gray-500"
+          className="lg:h-[150px] lg:w-full text-gray-500"
         >
           <path
             strokeLinecap="round"
