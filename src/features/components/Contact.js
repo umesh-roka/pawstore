@@ -16,7 +16,7 @@ const Contact=()=> {
       <h1 className="text-black uppercase text-2xl text-center font-bold">Contact Us</h1>
       <h1 className="text-justify text-lg mt-[20px] mx-5">Reach out to us for any queries or support related to your pet's needs. Whether you need advice, assistance, or have questions about our services, we're here to help you and your furry companions! Let's stay connected for a pawsitive experience.</h1>
 
-      <ul className="lg:ml-5 text-xl text-gray-700 mt-[30px] font-bold space-y-5">
+      <ul className="lg:ml-5 sm:ml-5 text-xl text-gray-700 mt-[30px] font-bold space-y-5">
         
         <div className="grid lg:grid-cols-2 sm:grid-cols-1">
        <NavLink> <li className="flex  mb-4 ">Phone Number <br/>
