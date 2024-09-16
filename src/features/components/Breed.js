@@ -12,6 +12,7 @@ import { imageUrl } from "../../constant/constant";
 import { useLocation, useNavigate } from "react-router";
 import PetPagination from '../pets/PetPagination';
 import LoadingPage from './LoadingPage';
+import NotGettingData from '../../ui/NotGettingData';
 
 
 const Breed = () => {
@@ -22,8 +23,7 @@ const Breed = () => {
 
   const location = useLocation()
    const isBreedPage = location.pathname === '/pets'
-  const { data, isLoading } = useGetPetsQuery({page:active});
-  console.log(data);
+  const { data, isLoading,error } = useGetPetsQuery({page:active});
   const [selectedCategory, setSelectedCategory] = useState('All'); // State for selected category
   const nav = useNavigate();
 
@@ -57,7 +57,7 @@ const Breed = () => {
       <div className="mt-7  sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
         {isLoading ? (
           <LoadingPage/>
-        ) : (
+        ) : error ?  <NotGettingData/> :(
           filteredPets.map(({ _id, pet_name, pet_detail, pet_category, pet_image }) => (
              <Card key={_id} className="sm:w-[190px] 
             shadow-2xl shadow-blue-gray-500/50

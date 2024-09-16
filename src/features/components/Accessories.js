@@ -15,6 +15,7 @@ import { useGetProductQuery } from "../../Api/productApi";
 import ProductPagination from "../product/ProductPagination";
 import { useEffect, useState } from "react";
 import LoadingPage from "./LoadingPage";
+import NotGettingData from "../../ui/NotGettingData";
  
 const Accessories =()=> {
   const [active, setActive] = useState(1)
@@ -24,7 +25,7 @@ const Accessories =()=> {
   })
 const location = useLocation();
   const isProductPage = location.pathname === '/accessories'
-const {data,isLoading} = useGetProductQuery({page:active});
+const {data,isLoading,error} = useGetProductQuery({page:active});
 console.log(data);
 const nav = useNavigate();
 
@@ -33,7 +34,7 @@ const nav = useNavigate();
 
     <div className=' pb-8  '>
       <h1 className='font-bold text-4xl uppercase text-center pt-6 '>Accessories</h1>
-      {isLoading ? <LoadingPage/>:<div> <div className="mt-7 sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
+      {isLoading ? <LoadingPage/>: error?<NotGettingData/>:<div> <div className="mt-7 sm:ml-[5px] lg:ml-[25px] grid sm:grid-cols-2 lg:grid-cols-5 lg:gap-5 sm:gap-3">
 
 {data?.data.map(({ _id, product_name, product_detail,product_category, product_image }) => {
   return  <Card className=" shadow-blue-gray-500/50 
