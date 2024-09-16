@@ -13,10 +13,11 @@ const LoadingPage=()=> {
 return (
   <>
   <div className=" grid lg:grid-cols-5 gap-4">
-    <Loading/>
-    <Loading/>
-    <Loading/>
-    <Loading/>
+    <div><Loading/></div>
+   <div> <Loading/></div>
+    <div><Loading/></div>
+    <div><Loading/></div>
+    <div><Loading/></div>
   </div>
   </>
 )
