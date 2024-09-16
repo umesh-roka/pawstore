@@ -3,7 +3,7 @@ import { Typography } from "@material-tailwind/react";
 const DetailPageLoading=()=> {
   return (
     <div className=" sm:ml-9 lg:ml-28  mt-10 flex animate-pulse flex-wrap items-center gap-8 ">
-      <div className="grid mt-10 h-[300px] lg:[400px] w-36 lg:w-[300px] place-items-center rounded-lg bg-gray-300">
+      <div className="grid mt-5 h-[300px] lg:[400px] w-36 lg:w-[300px] place-items-center rounded-lg bg-gray-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
