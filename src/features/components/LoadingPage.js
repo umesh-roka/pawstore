@@ -12,7 +12,7 @@ import {
 const LoadingPage=()=> {
 return (
   <>
-  <div className=" grid lg:grid-cols-5">
+  <div className=" grid lg:grid-cols-5 gap-4">
     <Loading/>
     <Loading/>
     <Loading/>
