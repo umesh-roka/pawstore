@@ -13,7 +13,7 @@ const Contact=()=> {
   return (
     <div className="  bg-orange-100 grid mb-2 mt-2 pb-[80px] sm:grid-cols-1 lg:grid-cols-2 lg:py-6">
     <div>
-      <h1 className="text-black uppercase text-2xl text-center font-bold">Contact Us</h1>
+      <h1 className="text-black uppercase sm:mt-4 text-2xl text-center font-bold">Contact Us</h1>
       <h1 className="text-justify text-lg mt-[20px] mx-5">Reach out to us for any queries or support related to your pet's needs. Whether you need advice, assistance, or have questions about our services, we're here to help you and your furry companions! Let's stay connected for a pawsitive experience.</h1>
 
       <ul className="lg:ml-5 sm:ml-5 text-xl text-gray-700 mt-[30px] font-bold space-y-5">
