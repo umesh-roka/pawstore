@@ -61,7 +61,6 @@ children:[
     children:[
       {path:'userorder',element:<UserOrder/>},
       {path:'order/:id',element:<OrderDetail/>},
-      {path:'cartpage',element:<CartPage/>},
       {path:'orderpage',element:<OrderPage/>},
       {path:'userprofile',element:<UserProfile/>},
     ]
@@ -69,6 +68,7 @@ children:[
 
 
 {index:true, element:<Home/>},
+{path:'cartpage',element:<CartPage/>},
 
 {path:'pets',element:<Breed/>},
 {path:'petdetail/:id',element:<PetDetail/>},
