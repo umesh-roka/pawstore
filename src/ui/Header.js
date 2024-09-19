@@ -271,7 +271,7 @@ const Header =()=> {
  
   return (
     <div className="sticky  top-0 z-50">
-    <Navbar className=" bg-orange-100 px-4 max-w-full rounded-none py-2 lg:px-8 lg:py-4">
+    <Navbar className=" bg-orange-100 px-4 lg:max-w-full rounded-none py-2 lg:px-8 lg:py-4">
    
       <div className="flex  flex-wrap items-center justify-between text-blue-gray-900">
         <Typography
