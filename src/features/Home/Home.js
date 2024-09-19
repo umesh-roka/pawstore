@@ -22,9 +22,9 @@ const Home = () => {
 <div className='bg-gray-100'>
  <Breed/>
  {user ? (user.isAdmin?'':<NavLink to='/pets'>
-  <Button className='uppercase sm:ml-[150px] lg:mx-[650px] my-[20px]'>See more</Button>
+  <Button className='uppercase sm:ml-[150px] lg:mx-[750px] my-[20px]'>See more</Button>
   </NavLink>):<NavLink to='/pets'>
-  <Button className='uppercase sm:ml-[150px] lg:mx-[650px] my-[20px]'>See more</Button>
+  <Button className='uppercase sm:ml-[150px] lg:mx-[750px] my-[20px]'>See more</Button>
   </NavLink>}
  </div>
  <figure className="relative h-96 my-7 ">
