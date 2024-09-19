@@ -378,7 +378,7 @@ const Header =()=> {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <div className="container mx-auto">
+        <div className="container ">
           {navList}
       {/* cart */}
        <NavLink onClick={handleNavItemClick} to='/cartpage'>         
